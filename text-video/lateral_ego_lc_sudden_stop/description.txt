@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a multi-lane city road on a clear day. The vehicle is involved in a sudden rear-end collision when it attempts to change lanes to the left, but traffic in that left lane slows down abruptly before the maneuver can be completed.

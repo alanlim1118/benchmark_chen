@@ -1,0 +1,1 @@
+The ego vehicle is driving forward under overcast daylight conditions on a two-lane road approaching a crosswalk. The vehicle is involved in a sudden emergency braking scenario when the slow-moving lead sedan ahead stops abruptly, and as the ego vehicle swerves right to avoid a direct rear-end collision, the lead sedan simultaneously drifts right, resulting in a minor impact.

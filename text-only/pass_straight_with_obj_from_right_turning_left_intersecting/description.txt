@@ -1,0 +1,1 @@
+the ego car proceeds straight through the intersection from the bottom lane. Meanwhile, an adversarial object from the right turns left across its path, creating an intersecting conflict.

@@ -1,0 +1,1 @@
+The ego vehicle is following a lane and is approaching an object that is driving in the same lane.

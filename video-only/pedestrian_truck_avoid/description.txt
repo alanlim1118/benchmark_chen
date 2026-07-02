@@ -1,0 +1,1 @@
+The ego vehicle is driving on a multi-lane urban road at night. The vehicle is involved in a severe side-impact collision when a truck in the left lane panic-swerves sharply into the ego vehicle's lane to avoid hitting a pedestrian crossing the dark street.

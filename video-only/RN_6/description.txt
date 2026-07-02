@@ -1,0 +1,1 @@
+Approaching a roundabout on a multi-lane road, the ego vehicle (green box) travels alongside an adversary (yellow box) initially positioned in the left lane. As they enter and navigate the roundabout, the adversary cuts directly into the ego's lane, forcing the ego vehicle to react and adjust its behavior to avoid a collision.

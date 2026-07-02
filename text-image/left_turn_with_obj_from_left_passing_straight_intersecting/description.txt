@@ -1,0 +1,1 @@
+the blue ego car attempts to make a left turn at the intersection. The pink adversarial car approaches from the left and passes straight through, creating an intersecting conflict directly across the ego car's path.

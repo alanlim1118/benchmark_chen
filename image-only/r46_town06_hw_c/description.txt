@@ -1,0 +1,3 @@
+Area: Highway
+Road Topology: Straight road
+Description: I am navigating through dense highway traffic and need to move toward the left-most lanes. This requires performing successive lane changes across multiple lanes of traffic. I must constantly monitor the positions and speeds of the many adversaries moving straight around me to execute these maneuvers safely.

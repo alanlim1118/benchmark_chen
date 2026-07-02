@@ -1,0 +1,1 @@
+ego vehicle is performing a U-turn in a 4-way intersection while a purple oncoming vehicle proceeds straight, creating an intersecting path conflict.

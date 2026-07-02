@@ -1,0 +1,133 @@
+scenario_id,description
+AnimalCrashWithPriorManeuver,"Vehicle is leaving a parked position in a
+rural area at night, under clear weather conditions; and
+encounters an animal at a non-junction area."
+BackingUpIntoAnotherVehicle,"Vehicle is backing up in an urban
+area, in daylight, under clear weather conditions, at a
+driveway or alley location, with a posted speed limit
+of 25 mph; and collides with another vehicle."
+EncroachingOncomingVehicle,"A vehicle equipped with an ADS feature is driving along a straight highway with one or more
+lanes. Another moving vehicle is approaching in an opposing lane of travel and begins to drift
+into the SV’s lane of travel such that a collision would occur if the SV did not react."
+Following Vehicle Approaching Lead Vehicle Moving at Lower Constant Speed,"Vehicle is going straight in an urban
+area, in daylight, under clear weather conditions, at a non-
+junction with a posted speed limit of 55 mph or more; and
+closes in on a lead vehicle moving at lower constant
+speed."
+Following Vehicle Approaching a Decelerating Lead Vehicle,"Vehicle is going straight and following
+another lead vehicle in a rural area, in daylight, under
+clear weather conditions, at a non-junction with a posted
+speed limit of 55 mph or more; and the lead vehicle
+suddenly decelerates."
+Following Vehicle Approaching an Accelerating Lead Vehicle,"Vehicle is going straight in an urban
+area, in daylight, under clear weather conditions, at an
+intersection-related location with a posted speed limit of
+45 mph; and closes in on an accelerating lead vehicle."
+Left Turn Across Path From Opposite Directions at Non-Signalized Junctions,"Vehicle is turning left, in
+daylight, under clear weather conditions, at an
+intersection without traffic controls, with a posted
+speed limit of 35 mph; and then cuts across the path
+of another vehicle traveling from the opposite
+direction."
+Left Turn across Path from Opposite Directions at Signalized Junctions,"Vehicle is turning left in an urban
+area, in daylight, under clear weather conditions, at
+a signalized intersection with a posted speed limit of
+35 mph; and cuts across the path of another vehicle
+straight crossing from an opposite direction."
+MoveOutOfTravelLane,"A vehicle equipped with an ADS feature is driving along a straight urban street with one or more
+lanes. It needs to move out of the active travel lanes to a parking area to allow passengers to
+embark or disembark."
+Straight Crossing Paths at Non-Signalized Junctions,"Vehicle stops at a stop sign in an urban
+area, in daylight, under clear weather conditions, at an
+intersection with a posted speed limit of 25 mph; and then
+proceeds against lateral crossing traffic."
+Vehicle Contacting Object Without Prior Vehicle Maneuver,"Vehicle is going straight in a rural area
+at night, under clear weather conditions, at a non-junction
+location with a posted speed limit of 55 mph or more; and
+collides with an object on the road."
+Vehicle Taking Evasive Action With Prior Vehicle Maneuver,"Vehicle is turning left at an intersection-
+related location, in an urban area, in daylight, under clear
+weather conditions, with a posted speed limit of 35 mph;
+and takes an evasive action to avoid an obstacle."
+Vehicle Turning Right at Signalized Junctions,"Vehicle is turning right in an urban
+area, in daylight, under clear weather conditions, at a
+signalized intersection with a posted speed limit of 35
+mph; and turns into the same direction of another
+vehicle crossing straight initially from a lateral
+direction."
+VehicleDrifting_VehicleTravelingInSameDirection,"Vehicle is going straight in an
+urban area, in daylight, under clear weather
+conditions, at a non-junction with a posted speed limit
+of 55 mph or more; and then drifts into an adjace
+vehicle traveling in the same direction."
+VehicleParking_VehicleTravelingInSameDirection,"Vehicle is leaving a parked position
+in an urban area, in daylight, under clear weather
+conditions, with a posted speed limit of 25 mph; and
+encounters another vehicle traveling in the same
+direction at a non-junction area."
+aborted_enter_lead_r,"The blue ego car is traveling directly straight in the center lane. Ahead and to the right, the pink lead car follows a wavy arrow trajectory that curves upward toward the middle lane before veering back down."
+aborted_lc_l_3,"The blue ego car executes an aborted lane change left by curving toward the left lane before steering back into the center. Two pink adversarial cars travel straight in that left lane, acting as the lead object and following object during this maneuver."
+approach_lat_crossing_traffic_area_from_right,The blue ego car travels straight along its lane. It approaches a pink adversarial object that is laterally moving and crossing the ego-traffic area from the right.
+approach_reversing,The blue ego car travels straight forward within its lane. It approaches a pink adversarial object directly ahead that is reversing backward toward it.
+cut_through_r,"the blue ego car travels straight forward within the middle lane. The pink adversarial car executes a ""cut through from right"" by crossing directly in front of the ego car's path from the right lane to the left lane."
+enter_turning_reversing_left,"the blue ego car drives straight forward within the middle lane. Ahead and to the left, the pink adversarial car executes an ""object entering turning reversing from left"" maneuver by backing up and curving into the adjacent lanes."
+exit_parallel_reversing_left,"the blue ego car travels straight forward within the lower lane. Directly ahead, the pink adversarial car executes an ""object exiting parallel reversing to the left"" maneuver by backing up and curving toward the left lane."
+lc_from_oc_1,"the blue ego car executes a ""lane change from oncoming traffic with leading vehicle"" by steering from the left lane into the right lane. The pink adversarial cars represent the oncoming traffic approaching in the left lane and the leading vehicle traveling ahead in the right lane."
+left_turn_free,the blue ego car execute a free left turn at the intersection
+left_turn_with_obj_from_left_passing_straight_intersecting,"the blue ego car attempts to make a left turn at the intersection. The pink adversarial car approaches from the left and passes straight through, creating an intersecting conflict directly across the ego car's path."
+left_turn_with_obj_from_right_turning_right,"the blue ego car enters the intersection to execute a left turn. Simultaneously, the pink adversarial car approaches from the right side and turns right, completing the scenario of a left turn with an object from the right turning right."
+left_turn_with_oncoming_obj_turning_right,"the blue ego car enters the intersection to execute a left turn. The pink adversarial car approaches from the opposite direction and turns right, resulting in a left turn with oncoming object turning right."
+merging_cut_through_r_0,"the blue ego car begins merging from the middle lane into the right lane. At the same time, the pink adversarial car ahead executes a ""merging cut through right without following vehicle"" maneuver by crossing directly down from the left lane into the right lane."
+multi_lcs_l,"the blue ego car executes ""multiple lane changes left"" by moving continuously from the right lane across to the left lane."
+neighbor_exiting_r,"the blue ego car travels straight forward within its lane. Beside it, the pink adversarial car executes an ""object exiting from the right side of ego"" maneuver by steering away into the right lane."
+neighbor_in_intersection_right,"the blue ego car travels straight forward through the intersection from the left lane. Simultaneously, the pink adversarial car moves straight ahead alongside it in the right lane, demonstrating an ""object staying right in intersection"" maneuver."
+pass_obj_in_intersection_parallel_left,"the blue ego car travels straight through the intersection from the right-hand lane. Directly to its left, the pink adversarial car also drives straight ahead, completing the scenario to ""pass object on the left parallel in intersection."""
+pass_obj_left_moving_toward_turning_right,"the blue ego car is positioned at the intersection while the pink adversarial car approaches from the left side. The pink vehicle then executes a ""pass object on the left moving towards ego, turning right"" maneuver by making a right turn into the downward street."
+pass_obj_right_moving_away_passing_straight,the blue ego car stands at the intersection while the pink adversarial car drives straight across from left to right.
+pass_straight_with_obj_from_left_crossing_after_node,"the blue ego car travels straight forward through the intersection. Meanwhile, a pink adversarial object crosses the road from the left."
+pass_straight_with_obj_from_right_entering_before_node,"the ego car travels straight forward through the intersection. Simultaneously, an adversarial object enters from the right side before the intersection node"
+passed_r,"the blue ego car travels straight forward within the left lane of the road. The pink adversarial car accelerates forward in the right lane, illustrating the scenario of an object passing right."
+r12_town06_ins_sl,"In an urban environment, the ego car executes a left turn at a T-junction from a connecting side road. Meanwhile, an oncoming adversarial car travels straight down the main road, intersecting with the ego car's turning path."
+r17_town05_ins_sr,"In an urban environment, the ego car travels straight forward through a major intersection. Concurrently, an adversarial car enters from the right cross street and makes a right turn into the same direction ahead of the ego car."
+r22_town07_ins_sr,"In a rural environment, the ego car travels straight through a T-junction along the main road. Meanwhile, an adversarial car turns right from the connecting side road into the same lane ahead of the ego car."
+r27_town06_hw_merge,"In a highway environment, the ego car travels straight forward along the main road structure. Meanwhile, an adversarial car drives along an entrance ramp to merge into the lane ahead of the ego car."
+r2_town05_ins_c,"In an urban environment, the ego car drives straight forward along a multi-lane road structure. Meanwhile, an adversarial car occupies the adjacent straight lane just ahead of the ego car."
+r32_town05_ins_oppo,"In an urban environment, the ego car travels straight forward toward a four-way intersection. An adversarial car is positioned directly ahead of the ego car in the same lane. As they reach the intersection, the adversarial car executes a left turn onto the cross street. Another adversarial car comes from the opposite direction at the same time."
+r37_town05_ins_chaos,"### Environment and Road Structure
+
+* **Environment:** The scene is set in an **urban environment** featuring multi-story city buildings, a structured parking lot, and a small park.
+* **Road Structure:** The traffic participants are navigating a large **four-way intersection** with multiple lanes, highlighted by a complex overlay of vehicle trajectory paths.
+
+### Vehicle Behaviors
+
+* **Ego Vehicle:** The ego car is traveling straight forward from the bottom lane directly into the intersection.
+* **Adversarial Vehicles (7 total):** * **Leading Car:** Located directly ahead of the ego vehicle in the same lane, initiating a right-hand turn.
+* **Left-Side Cars:** Two adversarial cars are approaching the intersection from the left cross street.
+* **Right-Side Cars:** Two adversarial cars are moving along the right cross street toward the intersection.
+* **Oncoming Cars:** Two adversarial cars are approaching from the opposite direction, positioned near the overpass structure at the top of the frame."
+r42_town05_ins_rl,"Environment and Road Structure
+Environment: The scenario is set in an urban environment featuring a row of residential buildings, sidewalks, and landscaped green areas.
+
+Road Structure: The vehicles are navigating a T-junction where a multi-lane horizontal main road meets a vertical side street.
+
+Vehicle Behaviors
+Ego Vehicle: The ego car approaches from the left along the main road and executes a right-hand turn into the vertical side street.
+
+Adversarial Vehicles: * Primary Adversarial Car: Approaching from the right side of the main road, this adversarial car executes a left-hand turn into the same vertical side street, creating a conflicting path with the ego vehicle.
+
+Other Vehicles: Two additional cars are present in the scene, with one following directly behind the ego car and another trailing behind the primary adversarial car."
+r43_town05_ins_crosschange,"Environment and Road Structure
+Environment: The scenario takes place in an urban environment, indicated by a multi-space parking lot, marked sidewalks, and city infrastructure.
+
+Road Structure: The vehicles are positioned at the entrance of a multi-lane four-way intersection.
+
+Vehicle Behaviors
+Ego Vehicle: The ego car is located at the left approach of the intersection, positioned in the upper lane next to the traffic line.
+
+Adversarial Vehicles (3 total): * Primary Adversarial Car: Positioned in the lower lane directly adjacent to the ego car, with its trajectory path showing a right-hand turn into the vertical cross street.
+
+Trailing Cars: The remaining two adversarial cars are following closely behind, with one situated directly behind the ego car and the other behind the primary adversarial car."
+r7_town05_ins_ss,"In an urban environment, the ego car travels straight through a four-way intersection. Meanwhile, an adversarial car proceeds straight from the cross street, cutting perpendicularly across the intersection."
+right_turn_free,"the blue ego car executes a ""free right turn"" at the intersection, moving from the bottom right lane into the intersecting street."
+right_turn_with_obj_from_right_crossing_before_node,"the blue ego car executes a right turn at the intersection from the bottom lane. At the same time, a pink adversarial object crosses the street from the right side"
+u-turn_with_obj_from_right_crossing_after_node,"the blue ego car executes a u-turn at the intersection from the bottom lane. Simultaneously, an adversarial object crosses the street."

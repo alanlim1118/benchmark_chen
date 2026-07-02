@@ -1,0 +1,4 @@
+Vehicle is turning left at an intersection-
+related location, in an urban area, in daylight, under clear
+weather conditions, with a posted speed limit of 35 mph;
+and takes an evasive action to avoid an obstacle.

@@ -1,0 +1,3 @@
+Area: Highly Urban
+Road Topology: 4-way intersection
+Description: I am attempting to navigate a complex, crowded intersection. Multiple adversaries are moving simultaneously: vehicles from the opposite side are turning left and going straight, while others from the side streets are entering the junction. My path intersects with several trajectories, including a red car turning left across my front and a green car coming straight.

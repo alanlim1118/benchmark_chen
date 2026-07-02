@@ -1,0 +1,4 @@
+a collision in which a vehicle travels
+forwards along a straight path across a junction, towards a vehicle crossing the junction on a
+perpendicular path. The frontal structure of the vehicle under test strikes the side of the other
+vehicle.

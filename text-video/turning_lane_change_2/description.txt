@@ -1,0 +1,1 @@
+The ego vehicle is traveling through a busy urban intersection on a clear day. The vehicle is involved in a sudden side-impact collision when a white passenger car aggressively cuts across two lanes of heavy traffic right into the ego vehicle's path.

@@ -1,0 +1,1 @@
+The ego vehicle is driving forward under highly challenging environmental conditions, navigating a narrow, wet, and foggy rural road. The ego vehicle is suddenly forced under an emergency scenario when an adversary cuts into its lane to avoid a roadside hazard, resulting in a direct side-swipe collision.

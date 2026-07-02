@@ -1,0 +1,1 @@
+a collision in which a vehicle travels forwards towards a bicyclist cycling in the same direction in front of the vehicle where the vehicle would strike the cyclist when no braking action is applied or an evasive steering action is initiated after an FCW.

@@ -1,0 +1,1 @@
+CARLA_Leaderboard_20;The ego-vehicle encounters an pedestrian emerging from behind a parked vehicle and advancing into the lane. The ego-vehicle must brake or maneuver to avoid it.

@@ -1,0 +1,1 @@
+The ego vehicle passes straight through an urban T-junction under clear weather conditions. Prior to entering the junction, a pedestrian on the left side of the road crosses the street ahead of the ego vehicle. As the ego vehicle reaches the intersection, an adversary vehicle on the left arm executes a left turn into the main road.

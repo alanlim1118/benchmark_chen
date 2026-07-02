@@ -1,0 +1,1 @@
+At a 4-way intersection, the ego vehicle (green box) moves straight ahead through the junction. Concurrently, an adversary (yellow box) from the right arm enters the intersection and executes a sharp left-hand turn, crossing into the path ahead of the ego vehicle.

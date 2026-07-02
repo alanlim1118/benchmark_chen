@@ -1,0 +1,1 @@
+the ego car travels straight forward within the middle lane. Ahead of it, the adversarial object moves across the lane, illustrating the scenario of a lead object entering from the right.

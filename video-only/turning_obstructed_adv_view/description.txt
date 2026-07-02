@@ -1,0 +1,1 @@
+In a rural or suburban area on a straight road, the ego vehicle is driving forward when a blue taxi pulls out from the right shoulder and cuts directly into the ego's lane. This sudden cut-in maneuver forces the ego vehicle to sharply decelerate from nearly 60 km/h to a complete stop to avoid a collision.

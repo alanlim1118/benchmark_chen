@@ -1,0 +1,1 @@
+In a rural environment, the ego car travels straight through a T-junction along the main road. Meanwhile, an adversarial car turns right from the connecting side road into the same lane ahead of the ego car.

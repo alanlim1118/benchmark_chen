@@ -1,0 +1,1 @@
+The ego vehicle is driving forward under wet weather conditions on an elevated highway or bridge. The ego vehicle is forced under an emergency braking scenario due to a motorcyclist losing control directly ahead, resulting in a rear-end collision with the fallen two-wheeled vehicle.

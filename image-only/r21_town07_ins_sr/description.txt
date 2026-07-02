@@ -1,0 +1,3 @@
+Area: Rural
+Road Topology: 4-way intersection
+Description: I am turning left at a rural junction surrounded by trees and farmland. Simultaneously, a red adversary vehicle from the opposite side is also performing a left turn. Our paths cross within the center of the intersection, necessitating careful coordination to avoid a side-swipe or head-on collision.

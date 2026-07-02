@@ -1,0 +1,5 @@
+Vehicle is leaving a parked position
+in an urban area, in daylight, under clear weather
+conditions, with a posted speed limit of 25 mph; and
+encounters another vehicle traveling in the same
+direction at a non-junction area.

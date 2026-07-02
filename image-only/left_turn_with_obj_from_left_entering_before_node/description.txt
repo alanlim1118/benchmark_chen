@@ -1,0 +1,1 @@
+Left turn with object from left entering before the node

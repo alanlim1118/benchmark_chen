@@ -1,0 +1,1 @@
+the ego car drives straight forward within its lane. Meanwhile, an adversarial motorcycle passes it from the adjacent left lane.

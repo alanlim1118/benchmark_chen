@@ -1,0 +1,1 @@
+the ego car travels straight forward within its lane. Ahead of it, an oncoming adversarial object exits the ego's traffic area by veering into the adjacent lane.

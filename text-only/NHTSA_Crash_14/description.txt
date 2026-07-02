@@ -1,0 +1,1 @@
+NHTSA_Crash_14;Vehicle A and vehicle B were both heading in the same direction on a multi-lane road in different lanes. B attempted to turn from the curb lane across the path of A onto a side street. Driver A struck illegally turning B in the driver's side.

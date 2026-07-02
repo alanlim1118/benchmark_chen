@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a two-lane mountain road on an overcast day. The vehicle is involved in a dangerous side-impact collision when a large red cargo truck attempts to overtake it from behind, squeezing into the ego vehicle's lane to avoid an oncoming motorcycle.

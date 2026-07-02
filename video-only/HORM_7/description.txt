@@ -1,0 +1,1 @@
+The ego vehicle is traveling down an on-ramp and merges onto a multi-lane straight road in a suburban area. A single red car is traveling ahead on the main road to the front-left of the ego vehicle, continuing straight in its lane. The ego vehicle must maintain a safe following distance as it completes its merge behind this leading vehicle.

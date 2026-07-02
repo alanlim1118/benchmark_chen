@@ -1,0 +1,1 @@
+UN_R171_5;The ego vehicle attempts to initiate a lane change while a parallel passenger car maintains a steady position directly in the "blind spot" or adjacent zone, requiring the ego vehicle to maintain its lane and wait for the adjacent vehicle to either accelerate or fall back before executing the lateral shift.

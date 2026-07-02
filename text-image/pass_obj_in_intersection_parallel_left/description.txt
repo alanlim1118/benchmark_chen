@@ -1,0 +1,1 @@
+the blue ego car travels straight through the intersection from the right-hand lane. Directly to its left, the pink adversarial car also drives straight ahead, completing the scenario to "pass object on the left parallel in intersection."

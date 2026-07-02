@@ -1,0 +1,386 @@
+# Plan: Rebalancing `scenariotypes.txt`
+
+> Supersedes the original `plan.md` (labeling `text-only/` against the 44
+> Bench2Drive types), which is complete. This plan covers a follow-up
+> taxonomy-design question raised after all five directories
+> (`text-only/`, `text-image/`, `text-video/`, `image-only/`,
+> `video-only/`, **250 scenarios total**) were labeled in
+> `scenario_labels.md`, against **51 types** (the original Bench2Drive 44
+> plus 7 project-added supplementary types 45-51: ReversingManeuver,
+> UTurn, ParallelLaneTraffic, AdversaryCutOut, RoundaboutNavigation,
+> AnimalOnRoad, HeavyVehicle).
+>
+> **Revision note (this pass):** re-reviewed against the latest
+> `scenario_type_counts.json` (349 total label-instances across 250
+> scenarios, up from 262/200). Two things changed materially since the
+> last revision: `StaticCutIn` more than doubled (17→33) and is now the
+> single largest type, overtaking `LaneChange` — driven heavily by
+> `video-only/`'s cut-in-heavy corpus. And `No strong match` is now
+> **0** (was 5) — `close_obj_side_in_intersection_left` got a clearer
+> description, and `DetectAndRespondToSchoolBus` was resolved by adding
+> `HeavyVehicle` (51). `StaticCutIn` is promoted from "considered and
+> rejected" to a full split proposal below (Part D). `AdversaryUTurn`
+> and `BaselineFreeDriving` (previously Part D) were decided against and
+> moved to "Considered and rejected."
+>
+> **Status update:** Parts D (`StaticCutIn`), B (`HardBrake`), and C
+> (`LaneChange`) are now **IMPLEMENTED** — see each section for actual
+> vs. estimated results. All three came in close to or smaller than the
+> original rough estimates once every row was re-read from source CSVs
+> rather than trusted from prior rationale text; Part B also dropped one
+> of its two proposed types (`StoppedLeadVehicle`) entirely after the
+> re-read showed it would pull zero rows. Types now number 45-56. Only
+> Part A (Opposite* pair) remains a projection, not yet executed.
+
+## Question being answered
+
+Should `scenariotypes.txt` be edited so the label distribution across the
+250 already-labeled scenarios comes out more even?
+
+## Recommendation
+
+**No, not by forcing equal counts** — but **yes, the taxonomy should
+change**. Two different problems are being conflated:
+
+1. **A handful of catch-all types are overloaded.** `StaticCutIn` (33),
+   `LaneChange` (31), `OppositeVehicleTakingPriority` (29), `HardBrake`
+   (27), and `OppositeVehicleRunningRedLight` (26) absorb 146 of 349
+   total label-instances (42%) because their definitions are broad
+   enough to be the "closest available fallback" for several genuinely
+   distinct conflict patterns. This is a **taxonomy granularity
+   problem** — fixable by splitting these into narrower types. The
+   concentration has gotten *worse* since the last revision (39%→42%),
+   not better, even after adding 50 more scenarios and one new type.
+2. **10 of the 44 original types still have zero matches** across all
+   250 scenarios (`ControlLoss`, `ParkingCutIn`, `VehiclesDooropenTwoWays`,
+   `YieldToEmergencyVehicle`, `EnterActorFlows`, `InterurbanActorFlow`,
+   `InterurbanAdvancedActorFlow`, `CrossingBicycleFlow`,
+   `VinillaSignalizedTurnEncounterGreenLight`,
+   `VinillaSignalizedTurnEncounterRedLight`) — the exact same 10 as
+   before, unchanged by 50 additional scenarios. This is strong
+   empirical confirmation that it's a **corpus composition problem**,
+   not a taxonomy flaw: two independent batches of new scenarios (100
+   more folders total across the last two revisions) produced zero new
+   matches for any of these 10. None of the five source directories
+   contain icy-road control loss, an emergency vehicle approaching from
+   behind, an interurban road, or a car door opening into traffic.
+
+Rejecting numeric balance as the goal also protects data integrity: this
+corpus mixes NHTSA's real-world crash typology (where left-turn-across-
+path and rear-end conflicts are the most common configurations by
+design), Euro NCAP/UN AEB test matrices, and CARLA scenario renders.
+Skew in those buckets is partly just an accurate reflection of what's
+actually in the source material.
+
+## A validated precedent: `HeavyVehicle` (51)
+
+Worth noting explicitly, since it bears on the open questions below:
+`HeavyVehicle` was added for a *single* scenario (`DetectAndRespondToSchoolBus`)
+with an explicitly narrow origin. A follow-up review of `text-video.csv`
+and `video-only.csv` found the pattern recurred 9 more times (trucks/buses
+the ego actively maneuvers around or reacts to), landing at 10 total —
+a legitimate, non-trivial type, not a one-off. The same check-before-
+deciding approach was then applied to `AdversaryUTurn` and
+`BaselineFreeDriving` (see "Considered and rejected" below) — and this
+time the sweep came back negative: both stayed at their original small
+counts (4 and 2) even after two corpus expansions, and both were
+rejected. The lesson holds either way: **check, don't assume** — narrow
+origin doesn't automatically mean "reject" (`HeavyVehicle`) or
+automatically mean "add" (`AdversaryUTurn`, `BaselineFreeDriving`).
+
+## Part 1 — Types to drop (or flag) from this project's active set
+
+All 10 zero-count types above. Recommend **soft-flagging, not deleting**:
+add a `## Unused in this corpus` section in `scenariotypes.txt` and move
+these rows there with a one-line note on why they don't appear (e.g.
+"requires an interurban road context absent from all 250 descriptions").
+Reasons to flag instead of hard-delete:
+
+- They remain the canonical Bench2Drive 44 for anyone using this file
+  outside this project.
+- If new scenario folders are added later (e.g. a directory drawn from
+  closed-course CARLA control-loss tests), the types are still there to
+  use — flagging is reversible, deletion isn't.
+- `count_scenario_labels.py` already reports 0 for unused types without
+  any code change, so flagging is cosmetic/organizational, not
+  functional.
+- Two full corpus expansions (200→250 scenarios, +2 new directories)
+  have now confirmed 0 matches for all 10 — this is not a small-sample
+  fluke.
+
+**Do not drop** types at count 1 (`Construction`, `ConstructionTwoWays`,
+`Accident`, `AccidentTwoWays`, `ParkedObstacleTwoWays`,
+`HazardAtSideLaneTwoWays`, `VehicleTurningRoute`, `HighwayExit`,
+`MergerIntoSlowTraffic`). These have a genuine, correct match — they're
+just rare in this corpus (mostly single `CARLA_Leaderboard_*` scenarios
+built specifically to test them). Rarity of a valid label isn't grounds
+for removal.
+
+## Part 2 — New types to add (splits of the overloaded catch-alls)
+
+### A. Split `OppositeVehicleRunningRedLight` (37) / `OppositeVehicleTakingPriority` (38) — 55 combined uses, highest priority
+
+These two were stretched to cover perpendicular crossings, oncoming
+left-turns-across-path, right-turning adversaries, and multi-agent
+chaos scenes — four different geometries under one "priority conflict"
+umbrella. Split out:
+
+- **`OncomingLeftTurnAcrossPath`** — *An oncoming vehicle turns left
+  directly across the ego vehicle's straight-ahead path, at a signalized
+  or non-signalized junction.* This is literally NHTSA's own "Left Turn
+  Across Path from Opposite Direction" category — two `text-image/`
+  folders are already named after it verbatim. Estimated pull: ~14-16
+  scenarios (`CCFtap_10kph_30kph`, `pass_straight_with_oncoming_obj_turning_left`,
+  `r11_town05_ins_sl`, `r16_town05_ins_sl`, `r31_town05_ins_oppo`,
+  `oncoming_snowy_headon`, `turning_truck_runredlight`, etc.)
+- **`PerpendicularCrossingConflict`** — *A vehicle crosses the ego's
+  straight path from a perpendicular side street, running a red light or
+  violating a stop/yield sign.* Keeps closer to the original 37/38
+  wording. Estimated pull: ~10-12 scenarios (`CCCscp_obstructed`,
+  `r7_town05_ins_ss`, `MD_Pedestrian_Crosswalk10`,
+  `turning_intersection_both_straight`, etc.)
+- Keep 37/38 themselves as the fallback for genuinely ambiguous or
+  multi-conflict junction scenes (e.g. `r26_town05_ins_chaos`,
+  `MD_Intersection_Deadlock_Resolution2/6`, `IDR_5`) where no single
+  geometry dominates.
+
+### B. Split `HardBrake` (16) — 27 uses
+
+**Status: IMPLEMENTED**, with one part of the original proposal dropped
+after re-reading all 27 source descriptions from their CSVs.
+
+- **`StoppedLeadVehicle` — DROPPED, not added.** The scenarios that
+  motivated it (`Following Vehicle Approaching a Stopped Lead Vehicle`,
+  `MD_BlockedLaneObstacle1`) turned out to already be labeled `22
+  BlockedIntersection`, not `HardBrake` — they were never in this
+  bucket to begin with, so the estimate was built on a stale
+  assumption. Re-reading the actual 27 `HardBrake` rows found zero that
+  describe an *already*-stationary lead; every "stopped" case describes
+  an active event ("suddenly brakes and stops," "suddenly stops,"
+  "abruptly anchors its brakes") — which is exactly core `HardBrake`,
+  not a distinct stopped-lead pattern. The gap this type was meant to
+  close is already served by `BlockedIntersection`.
+- **`EmergencyObstacleAvoidance`** (added as type 54) — *Ego must brake
+  or swerve suddenly for a hazard, obstacle, or non-vehicle actor, with
+  no vehicle actively decelerating as the stated trigger.* **Actual
+  pull: 5 scenarios** (`NHTSA_PreCrash_29`, both `Vehicle Taking Evasive
+  Action *` folders, `CBLA_50_50kph` [cyclist, not a decelerating lead],
+  `lateral_cut_in_twowheeler_highway` [motorcyclist losing control, not
+  an active deceleration]) — close to the low end of the ~6-7 estimate.
+  `in_lane_approaching_long_moving`/`in_lane_following` were
+  re-considered but kept on generic `HardBrake`: both describe "closing
+  in on" a lead vehicle with no stated trigger at all, which doesn't
+  cleanly fit "no lead vehicle" either — see the note on a further
+  latent gap below.
+- `HardBrake` itself narrowed to **22** (vs. the ~13-15 estimate) —
+  higher than projected because `StoppedLeadVehicle` pulled nothing.
+  22 + 5 = 27, confirming no rows were lost.
+
+**Further latent gap identified, not addressed:** several rows
+(`NHTSA_PreCrash_20`, `Following Vehicle Approaching an Accelerating
+Lead Vehicle`, `Following Vehicle Approaching Lead Vehicle Moving at
+Lower Constant Speed`, `CCRm_50kph`, `in_lane_approaching_long_moving`,
+`in_lane_following`) describe closing in on a lead vehicle that is
+*not* decelerating (constant speed, accelerating, or unstated) — this
+doesn't fit `HardBrake` (no deceleration), `EmergencyObstacleAvoidance`
+(there is a lead vehicle), or the dropped `StoppedLeadVehicle` (lead is
+moving, not stationary). These 6 rows remain on generic `HardBrake` at
+Weak confidence, same as before the split — a `ClosingOnSteadyLeadVehicle`
+type could address this, but wasn't added here since it wasn't part of
+the original proposal; flagging for a future pass if you want it.
+
+### C. Split `LaneChange` (43) — 31 uses
+
+**Status: IMPLEMENTED.** All 31 rows re-read from source CSVs, plus one
+adjacent row not originally labeled `LaneChange` at all (see below).
+
+- **`OvertakingIntoOncomingLane`** (added as type 55) — *Ego passes a
+  slower vehicle by crossing into the opposing lane.* **Actual pull: 6
+  scenarios** (`NHTSA_PreCrash_16`, `lc_from_oc_1`,
+  `lateral_overtake_adv_slower_traffic`, `lc_from_oc_3`,
+  `VehicleMakingAManeuver_VehicleTravelingInOppositeDirection`,
+  `turning_adv_exit_ego_overtake`) — matches the ~6-7 estimate closely.
+  `NHTSA_PreCrash_18` was reconsidered but kept generic — it never says
+  "opposite direction," only "closes in on a lead vehicle."
+  `lateral_ego_overtake_truck_invade` was also reconsidered but kept
+  generic — it happens on a "multi-lane roadway" with no oncoming-lane
+  crossing stated, unlike the two-lane-road scenarios that do qualify
+  (`lateral_overtake_adv_slower_traffic`, `turning_adv_exit_ego_overtake`).
+  The distinguishing signal that worked well: two-lane road + explicit
+  "overtake"/"pass" language reliably implies crossing into the
+  opposing lane; multi-lane road does not.
+- **`UnintentionalLaneDrift`** (added as type 56) — *A vehicle drifts
+  out of its lane without an intentional maneuver.* **Actual pull: 2
+  scenarios**, matching the estimate exactly — but not the same
+  scenario set originally listed. `VehicleDrifting_VehicleTravelingInSameDirection`
+  moved from `LaneChange` as expected. `VehicleNotMakingAManeuver_VehicleTravelingInOppositeDirection`
+  was **not** in the `LaneChange` bucket at all — it was already
+  labeled `18 InvadingTurn` from an earlier pass. Caught it anyway
+  since its description ("drifts... with no maneuver") is a near-verbatim
+  match, and added `UnintentionalLaneDrift` as a second label alongside
+  the existing `InvadingTurn` rather than replacing it (both facts are
+  true: it's an unintentional drift, and the outcome is a lane
+  invasion).
+- `LaneChange` narrowed to **24** (vs. the ~22-23 estimate, very close)
+  — discretionary and yield-based lane changes proper (the `UN_R171_*`,
+  `lc_*`, `multi_lcs_l`, `InterDrive_r35_town05_ins_crosschange` family).
+  24 + 6 = 30, one short of the original 31 `LaneChange` rows, because
+  the 31st (`VehicleDrifting_...`) moved out entirely to
+  `UnintentionalLaneDrift` rather than staying dual-labeled.
+
+### D. Split `StaticCutIn` (4) — 33 uses, now the single largest type (NEW, promoted from "considered and rejected")
+
+**Status: IMPLEMENTED.** This type more than doubled since the last
+revision (17→33), driven almost entirely by `video-only/`'s dense
+cut-in scenarios, and had become the #1 most-used type — ahead of
+`LaneChange`. All 33 rows were re-read from their source CSVs (not just
+the existing rationale text) and split by stated cause:
+
+- **`JunctionEntryCutIn`** (added as type 52) — *An adversary turns from
+  a cross-street, ramp, or side road into the ego's lane at or near a
+  junction, becoming a leading vehicle.* **Actual pull: 7 scenarios**
+  (`r17_town05_ins_sr`, `r22_town07_ins_sr`, `MD_Interdriver14` [Weak],
+  `IDR_3`, `InterDrive_r19_town05_ins_sr`, `moving_sudden_enter_adv`,
+  `turning_ego_left_adv_mergesin_afterjunction`) — lower than the
+  ~10-11 estimate, since several originally-assumed candidates
+  (`enter_lead_r`, `enter_turning_forward_left`, `aborted_enter_lead_r/l`,
+  `neighbor_entering_r`) turned out on re-read to never mention a
+  junction/cross-street at all — they stayed on the generic type rather
+  than being force-fit.
+- **`HazardAvoidanceCutIn`** (added as type 53) — *An adversary cuts
+  into the ego's lane specifically to avoid an obstacle, hazard, or
+  pedestrian in its own lane.* **Actual pull: 7 scenarios**
+  (`lateral_adv_avoidmerge`, `lateral_adv_cutin_navigateobstacle`,
+  `lateral_left_turn_cut_in_intersection`, `lateral_truck_overtake`,
+  `lateral_cut_in_rural`, `lateral_navigate_parked_motorcycle`,
+  `pedestrian_truck_avoid`) — matches the ~5-6 estimate closely.
+- `StaticCutIn` itself narrowed to **19** (vs. the ~16-18 estimate) —
+  generic aggressive/discretionary adjacent-lane cut-ins with no other
+  specific stated cause (shoulder pull-outs, multi-lane highway merges,
+  simple lane-stealing, roundabout cut-ins).
+
+19 + 7 + 7 = 33, confirming no rows were dropped or double-counted in
+the split. Verified in `scenario_type_counts.json`: `No strong match`
+stayed at 0 throughout, and the total row count stayed at 250.
+
+This was the highest-value split in this revision by raw numbers: it
+pulled the largest single type down by nearly half (33→19), even though
+the two new types came in smaller than originally estimated — being
+conservative (only re-typing a row when the description explicitly
+supported it) mattered more than hitting the pre-estimate.
+
+### Considered and rejected (not worth adding)
+
+- **`AdversaryUTurn`** — *An adversary vehicle (not the ego) makes an
+  unexpected u-turn, forcing the ego to react.* **Decision: not worth
+  adding.** Currently forced into Weak matches on
+  `OppositeVehicleTakingPriority`/`InvadingTurn`/`NonSignalizedJunctionLeftTurn`
+  for 4 scenarios (`left_turn_with_obj_from_right_making_a_u-turn`,
+  `pass_obj_left_moving_toward_making_u-turn`,
+  `pass_straight_with_oncoming_obj_making_a_u-turn`,
+  `parallel_entry_passing_straight_with_obj_right_making_u-turn`), and a
+  keyword sweep confirmed `video-only/` added no further instances —
+  still exactly 4 after two corpus expansions. Unlike `HeavyVehicle`,
+  which started just as narrow but was confirmed to recur once checked,
+  this one was checked and *didn't* recur — 4 stays the floor and the
+  ceiling. Left as a documented, Weak-confidence gap rather than a type.
+- **`BaselineFreeDriving`** — *Ego drives with no adversary and no
+  conflict described* — a negative-control / regression-test category.
+  **Decision: not worth adding.** Only 2 candidate scenarios remain
+  (`left_turn_free`, `right_turn_free` in `text-image/`) — the third,
+  `free` in `image-only/`, was removed from the source directory in a
+  later edit. A 2-instance type has poor ROI, same reasoning as the
+  rejected `CloseProximityEvent`/`YieldToStoppedSpecialVehicle` from the
+  prior revision. These two rows stay on their existing (Weak/fallback)
+  labels.
+- **`CloseProximityEvent`** for a generic near-miss/close-distance
+  event — no longer needed. The one candidate scenario
+  (`close_obj_side_in_intersection_left`) got a clearer description in
+  a later edit and now resolves cleanly to `HazardAtSideLane` (11).
+
+## Projected impact
+
+| Type (before) | Before | After split | Result |
+|---|---|---|---|
+| StaticCutIn | 33 | → 3 types | **DONE: 19 / 7 / 7** (actual) |
+| HardBrake | 27 | → 2 types | **DONE: 22 / 5** (actual — `StoppedLeadVehicle` dropped) |
+| LaneChange | 31 | → 3 types | **DONE: 24 / 6 / 2** (actual) |
+| OppositeVehicleTakingPriority + RunningRedLight | 55 | → 3 types | ~20 / ~15 / ~11 (still projected) |
+| 10 zero-count types | 0 | flagged, not deleted | 0 (documented), still pending |
+
+`AdversaryUTurn` and `BaselineFreeDriving` are omitted from this table —
+both were rejected (see "Considered and rejected"); their 4 and 2
+affected rows stay on existing labels.
+
+*The Opposite* row's "after" figures (~46) sum to less than the "before"
+figure (55) because many current rows carry both 37 and 38 simultaneously
+as a hedge against unstated signal state — after the split, a row that
+resolves to a specific geometry generally only needs one new label, so
+that double-counting collapses. This isn't a loss of information, just
+less redundant counting.*
+
+**Splits D, B, and C done.** Max single-type count is now 29
+(`OppositeVehicleTakingPriority`), down from the pre-split peak of 33
+(`StaticCutIn`). Only split A (Opposite* pair) remains a projection, not
+yet executed — once done, the max should drop to roughly 20. `No strong
+match` has stayed at 0 through all three completed splits, as expected
+(they only touched rows that already had a valid label).
+
+**Consistent pattern across all three completed splits:** actual
+results came in close to, or smaller than, the original rough estimates
+every time a row was re-read from its source CSV instead of trusted
+from prior rationale text (`StaticCutIn`: 33→19/7/7 vs. ~16-18/~10-11/~5-6
+estimated; `HardBrake`: 27→22/5 vs. ~13-15/~6-7/~6-7 estimated, with one
+entire proposed type dropped; `LaneChange`: 31→24/6/2, close to the
+~22-23/~6-7/~2 estimate, plus one bonus catch from an adjacent type).
+This isn't a failure of the estimates — it's what happens when "the
+closest available type" assumptions get checked against the actual text
+rather than assumed. The `LaneChange` split also demonstrated a useful
+side effect: while re-reading for it, a mislabeled row from a *different*
+type (`InvadingTurn`) was caught and fixed too, because its description
+matched the new type better than its old one. Worth doing the same
+sweep — checking adjacent types, not just the one being split — for
+split A.
+
+## Implementation steps
+
+1. ~~Add `JunctionEntryCutIn` (52) and `HazardAvoidanceCutIn` (53) to
+   `scenariotypes.txt`; relabel 14 `StaticCutIn` rows.~~ **DONE.**
+2. ~~Add `EmergencyObstacleAvoidance` (54) to `scenariotypes.txt`;
+   relabel 5 `HardBrake` rows; drop `StoppedLeadVehicle` after
+   confirming it would pull zero rows.~~ **DONE.**
+3. ~~Add `OvertakingIntoOncomingLane` (55) and `UnintentionalLaneDrift`
+   (56) to `scenariotypes.txt`; relabel 8 rows (6 `LaneChange` rows to
+   OvertakingIntoOncomingLane, 1 `LaneChange` row and 1 `InvadingTurn`
+   row to UnintentionalLaneDrift).~~ **DONE.**
+4. ~~Regenerate `scenario_type_counts.json` after each split; confirm
+   row count still 250, `No strong match` still 0.~~ **DONE**, three
+   times.
+5. Remaining, not yet executed:
+   - Add the 2 new types for split A (`OncomingLeftTurnAcrossPath`,
+     `PerpendicularCrossingConflict`) to `scenariotypes.txt`, continuing
+     the numbering from 57 — re-verify each against source CSVs first,
+     not the original rough estimate.
+   - Move the 10 zero-count types into a new `## Unused in this corpus`
+     section in `scenariotypes.txt`, each with a one-line reason.
+   - Re-pass `scenario_labels.md` for every row currently labeled
+     `OppositeVehicleRunningRedLight` or `OppositeVehicleTakingPriority`
+     — same re-read-from-CSV methodology used for the other three
+     splits, and check adjacent types (e.g. rows currently on other
+     junction/crossing types) the way the `LaneChange` pass caught a
+     stray `InvadingTurn` row.
+   - Regenerate `scenario_type_counts.json` again; update each
+     directory's "Summary of coverage gaps."
+
+## Open questions for you
+
+- Soft-flag vs. hard-delete the 10 zero-count types — I'm recommending
+  soft-flag (reversible), but this is a judgment call you may weigh
+  differently. Two corpus expansions have now confirmed they're
+  unused, which strengthens the case either way you land.
+- Whether to proceed with split A (Opposite* pair) — the last remaining
+  one. All three completed splits (D, B, C) came in close to or smaller
+  than estimated once every row was re-read from source, and B lost an
+  entire proposed type in the process; recommend applying the same
+  re-read-don't-estimate approach to A rather than adding its new types
+  on the strength of the original estimate alone.

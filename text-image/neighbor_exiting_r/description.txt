@@ -1,0 +1,1 @@
+the blue ego car travels straight forward within its lane. Beside it, the pink adversarial car executes an "object exiting from the right side of ego" maneuver by steering away into the right lane.

@@ -1,0 +1,3 @@
+Area: Highway
+Road Topology: Straight road
+Description: I am driving in heavy traffic on a multi-lane highway. I am initiating a lane change to the left. I am surrounded by numerous adversaries in all lanes; I must find a sufficient gap in the left lane to merge without causing the vehicles behind or beside me to brake abruptly.

@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a multi-lane city road on an overcast day. The vehicle is involved in a sudden side-impact collision when a passenger car pulls out from a left-hand junction to turn into the ego's lane. The ego vehicle could not anticipate or see the turning vehicle because its view of the junction was completely blocked by passing oncoming traffic.

@@ -1,0 +1,1 @@
+The ego vehicle is navigating a curved, rural road on an overcast day. The vehicle is involved in a sudden head-on collision when a white passenger microvan rounding a blind corner drifts entirely into the oncoming lane, completely cutting off the ego vehicle's path.

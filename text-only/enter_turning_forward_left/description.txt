@@ -1,0 +1,1 @@
+the ego car travels straight forward within the middle lane. Meanwhile, an adversarial object cuts ahead by turning from the left lane toward the right.

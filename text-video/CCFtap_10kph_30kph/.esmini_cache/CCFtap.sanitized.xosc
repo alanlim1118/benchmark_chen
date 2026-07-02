@@ -1,0 +1,354 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenSCENARIO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OpenSCENARIO.xsd">
+  
+  <FileHeader revMajor="1" revMinor="3" date="2026-02-24T14:44:00" author="Vector Informatik GmbH" description="Base Scenario CCFtap from Euro NCAP Crash Avoidance Frontal Collisions 2026 Protocol">
+    <License name="Mozilla Public License Version 2.0" resource="https://www.mozilla.org/en-US/MPL/2.0/" spdxId="MPL-2.0" />
+    <Properties>
+      <Property name="DYNA4.Version" value="10.0.0" />
+    </Properties>
+  </FileHeader>
+  <ParameterDeclarations>
+    <ParameterDeclaration name="Ego_speed_kph" parameterType="double" value="10" />
+    <ParameterDeclaration name="Ego_initTTC" parameterType="double" value="15">
+      
+      <ConstraintGroup>
+        <ValueConstraint value="5" rule="greaterThan" />
+        
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Ego_length" parameterType="double" value="4.358" />
+    <ParameterDeclaration name="Ego_BBcenter_x" parameterType="double" value="1.349" />
+    <ParameterDeclaration name="Ego_wheelBase" parameterType="double" value="2.67" />
+    <ParameterDeclaration name="Ego_turningDirection" parameterType="int" value="1">
+      
+      
+      <ConstraintGroup>
+        <ValueConstraint value="1" rule="equalTo" />
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_catalogName" parameterType="string" value="Vehicles" />
+    <ParameterDeclaration name="Target_catalogEntry" parameterType="string" value="NCAP_GlobalVehicleTarget" />
+    <ParameterDeclaration name="Target_width" parameterType="double" value="1.712" />
+    <ParameterDeclaration name="Target_length" parameterType="double" value="4.023" />
+    <ParameterDeclaration name="Target_BBcenter_x" parameterType="double" value="1.328" />
+    <ParameterDeclaration name="Target_final_speed_kph" parameterType="double" value="30" />
+    <ParameterDeclaration name="Target_initTTC" parameterType="double" value="11">
+      
+      <ConstraintGroup>
+        <ValueConstraint value="5" rule="greaterThan" />
+        
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Target_steadyStateDist" parameterType="double" value="50">
+      
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Road_armLength" parameterType="double" value="250" />
+    <ParameterDeclaration name="Road_laneWidth" parameterType="double" value="3.5" />
+    <ParameterDeclaration name="Road_radius" parameterType="double" value="8">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_R1" parameterType="double" value="1500">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_R2" parameterType="double" value="9">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_alpha" parameterType="double" value="20.62">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Trajectory_beta" parameterType="double" value="48.76">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="Scenario_ID" parameterType="string" value="CCFtap">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_speed" parameterType="double" value="${$Ego_speed_kph/3.6}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_frontBumperLon" parameterType="double" value="${$Ego_BBcenter_x+($Ego_length/2)}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_initS" parameterType="double" value="${$Road_armLength-$_Ego_speed*$Ego_initTTC}">
+      
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0" />
+        
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_frontBumperLon" parameterType="double" value="${$Target_BBcenter_x+($Target_length/2)}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_finalSpeed" parameterType="double" value="${$Target_final_speed_kph/3.6}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_initS" parameterType="double" value="${$Road_armLength-$_Target_finalSpeed*$Target_initTTC}">
+      
+      <ConstraintGroup>
+        <ValueConstraint rule="greaterThan" value="0" />
+        
+      </ConstraintGroup>
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_kappa1" parameterType="double" value="${1/$Trajectory_R1}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_kappa2" parameterType="double" value="${1/$Trajectory_R2}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_alpha_rad" parameterType="double" value="${$Trajectory_alpha*pi/180}" />
+    <ParameterDeclaration name="_Trajectory_beta_rad" parameterType="double" value="${$Trajectory_beta*pi/180}" />
+    <ParameterDeclaration name="_Trajectory_clothoidLength" parameterType="double" value="${(2*$_Trajectory_alpha_rad)/($_Trajectory_kappa2+$_Trajectory_kappa1)}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_arcLength" parameterType="double" value="${$_Trajectory_beta_rad*$Trajectory_R2}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_clothoidKappaRate" parameterType="double" value="${($_Trajectory_kappa2-$_Trajectory_kappa1)/$_Trajectory_clothoidLength}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_clothoidDeltaLong" parameterType="double" value="${$_Trajectory_clothoidLength*(1-0.5*pow((0.5*$_Trajectory_kappa1*pow($_Trajectory_clothoidLength, 2)+$_Trajectory_clothoidKappaRate*$_Trajectory_clothoidLength), 2))}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_clothoidDeltaShort" parameterType="double" value="${$_Trajectory_clothoidLength*(0.5*$_Trajectory_kappa1*pow($_Trajectory_clothoidLength, 2)+$_Trajectory_clothoidKappaRate*$_Trajectory_clothoidLength-((1/6)*pow((0.5*$_Trajectory_kappa1*pow($_Trajectory_clothoidLength, 2)+$_Trajectory_clothoidKappaRate*$_Trajectory_clothoidLength),3)))}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_arcDelta" parameterType="double" value="${2*$Trajectory_R2*cos(pi/4)*sin($_Trajectory_beta_rad/2)}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_totalDelta" parameterType="double" value="${$_Trajectory_arcDelta+$_Trajectory_clothoidDeltaShort+$_Trajectory_clothoidDeltaLong}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_straightLength" parameterType="double" value="${$Road_armLength-$_Ego_initS-$_Trajectory_totalDelta+$Road_radius+$Road_laneWidth*(1+$Ego_turningDirection/2)}">
+      
+      
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_arcAngleCollisionPoint" parameterType="double" value="${acos(cos($_Trajectory_alpha_rad)-($Road_laneWidth-$_Trajectory_clothoidDeltaShort)/$Trajectory_R2)-$_Trajectory_alpha_rad}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_arcLengthCollisionPoint" parameterType="double" value="${$Trajectory_R2*$_Trajectory_arcAngleCollisionPoint}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Trajectory_bendCollisionPoint" parameterType="double" value="${$_Trajectory_totalDelta-$_Trajectory_clothoidDeltaLong-$Trajectory_R2*(sin($_Trajectory_arcAngleCollisionPoint+$_Trajectory_alpha_rad)-sin($_Trajectory_alpha_rad))}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_syncS" parameterType="double" value="${$_Trajectory_straightLength+$_Trajectory_clothoidLength+$_Trajectory_arcLengthCollisionPoint-$_Ego_frontBumperLon-sqrt(2*$Target_width/2*$Target_width/2)}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Target_syncS" parameterType="double" value="${$Road_armLength+$Road_radius+$Road_laneWidth/2-$_Target_frontBumperLon+$_Trajectory_bendCollisionPoint}">
+      
+    </ParameterDeclaration>
+    <ParameterDeclaration name="_Ego_TurnSignalActivationS" parameterType="double" value="${$_Trajectory_straightLength-$_Ego_speed-$Ego_wheelBase}">
+      
+    </ParameterDeclaration>
+  </ParameterDeclarations>
+  <VariableDeclarations>
+    <VariableDeclaration name="collisionDetected" variableType="boolean" value="false" />
+    <VariableDeclaration name="egoSpeedReached" variableType="double" value="0.0" />
+  </VariableDeclarations>
+  <CatalogLocations>
+    <VehicleCatalog>
+      <Directory path="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenSCENARIO/NCAP/Catalogs/Vehicles" />
+    </VehicleCatalog>
+    <PedestrianCatalog>
+      <Directory path="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenSCENARIO/NCAP/Catalogs/Pedestrians" />
+    </PedestrianCatalog>
+    <TrajectoryCatalog>
+      <Directory path="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenSCENARIO/NCAP/Catalogs/Trajectories" />
+    </TrajectoryCatalog>
+    <RouteCatalog>
+      <Directory path="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenSCENARIO/NCAP/Catalogs/Routes" />
+    </RouteCatalog>
+    <ManeuverCatalog>
+      <Directory path="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenSCENARIO/NCAP/Catalogs/Maneuver" />
+    </ManeuverCatalog>
+    <EnvironmentCatalog>
+      <Directory path="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenSCENARIO/NCAP/Catalogs/Environments" />
+    </EnvironmentCatalog>
+  </CatalogLocations>
+  <RoadNetwork>
+    <LogicFile filepath="/home/alan/esmini-demo_Linux/esmini-demo/OSC-NCAP-scenarios-main/OpenDRIVE/NCAP/X-Intersection_NCAP.xodr" />
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="Ego">
+      <CatalogReference entryName="VW_Golf_Sportsvan_2015" catalogName="Vehicles" />
+    </ScenarioObject>
+    <ScenarioObject name="Target">
+      <CatalogReference entryName="$Target_catalogEntry" catalogName="$Target_catalogName" />
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction>
+          <EnvironmentAction>
+            <CatalogReference catalogName="Environments" entryName="Sunny" />
+          </EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="Ego">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CxTx">
+                    <ParameterAssignments>
+                      <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa1}" parameterRef="kappa1" />
+                      <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa2}" parameterRef="kappa2" />
+                      <ParameterAssignment value="$_Trajectory_clothoidLength" parameterRef="clothoidLength" />
+                      <ParameterAssignment value="$_Trajectory_arcLength" parameterRef="arcLength" />
+                      <ParameterAssignment value="$_Ego_initS" parameterRef="start_s" />
+                      <ParameterAssignment value="$_Trajectory_straightLength" parameterRef="straight_length" />
+                    </ParameterAssignments>
+                  </CatalogReference>
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="$_Ego_speed" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="Target">
+          <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction initialDistanceOffset="$_Target_initS">
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+                <TrajectoryRef>
+                  <CatalogReference catalogName="TrajectoryCatalog" entryName="Target_straightAcross" />
+                </TrajectoryRef>
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="NCAP_CA-FC_CCFtap_2026">
+      <Act name="Collision_Act">
+        <ManeuverGroup name="Synchronization_CollisionDetection" maximumExecutionCount="1">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="Target" />
+          </Actors>
+          <CatalogReference catalogName="ManeuverCatalog" entryName="LogAndSetVariables">
+            <ParameterAssignments>
+              <ParameterAssignment parameterRef="egoSpeed" value="$_Ego_speed" />
+              <ParameterAssignment parameterRef="collidingEntity" value="Target" />
+            </ParameterAssignments>
+          </CatalogReference>
+          <Maneuver name="Target_Synchronization">
+            <Event name="Target_SynchronizeEvent" priority="override">
+              <Action name="Target_SynchronizeAction">
+                <PrivateAction>
+                  <SynchronizeAction masterEntityRef="Ego">
+                    <TargetPositionMaster>
+                      <TrajectoryPosition s="$_Ego_syncS">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="Ego_CxTx">
+                            <ParameterAssignments>
+                              <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa1}" parameterRef="kappa1" />
+                              <ParameterAssignment value="${$Ego_turningDirection*$_Trajectory_kappa2}" parameterRef="kappa2" />
+                              <ParameterAssignment value="$_Trajectory_clothoidLength" parameterRef="clothoidLength" />
+                              <ParameterAssignment value="$_Trajectory_arcLength" parameterRef="arcLength" />
+                              <ParameterAssignment value="$_Ego_initS" parameterRef="start_s" />
+                              <ParameterAssignment value="$_Trajectory_straightLength" parameterRef="straight_length" />
+                            </ParameterAssignments>
+                          </CatalogReference>
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPositionMaster>
+                    <TargetPosition>
+                      <TrajectoryPosition s="$_Target_syncS">
+                        <TrajectoryRef>
+                          <CatalogReference catalogName="TrajectoryCatalog" entryName="Target_straightAcross" />
+                        </TrajectoryRef>
+                      </TrajectoryPosition>
+                    </TargetPosition>
+                    <FinalSpeed>
+                      <AbsoluteSpeed value="$_Target_finalSpeed">
+                        <TargetDistanceSteadyState distance="$Target_steadyStateDist" />
+                      </AbsoluteSpeed>
+                    </FinalSpeed>
+                  </SynchronizeAction>
+                </PrivateAction>
+              </Action>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition name="SimulationStart" delay="0" conditionEdge="rising">
+              <ByValueCondition>
+                <SimulationTimeCondition value="0.5" rule="greaterThan" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+      </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition name="StopAfterCollision" delay="3" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="collisionDetected" rule="equalTo" value="true" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="EgoSpeedReached" delay="1" conditionEdge="none">
+          <ByValueCondition>
+            <VariableCondition variableRef="egoSpeedReached" rule="greaterThan" value="0" />
+          </ByValueCondition>
+        </Condition>
+        <Condition name="StopAtStandstill" delay="1" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <StandStillCondition duration="0.1" />
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopPastTarget" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${$_Trajectory_straightLength+$_Trajectory_clothoidLength+$_Trajectory_arcLength+$Ego_length}" />
+              
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+      <ConditionGroup>
+        <Condition name="StopTargetCrossed" delay="0" conditionEdge="none">
+          <ByEntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Target" />
+            </TriggeringEntities>
+            <EntityCondition>
+              <TraveledDistanceCondition value="${1.5*($_Target_syncS-$_Target_initS)}" />
+              
+            </EntityCondition>
+          </ByEntityCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>

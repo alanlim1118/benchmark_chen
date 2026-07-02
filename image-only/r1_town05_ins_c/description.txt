@@ -1,0 +1,3 @@
+Area: Urban / City Edge
+Road Topology: Straight road
+Description: I am driving straight on a multi-lane road near a railway. A red adversary vehicle in the lane to my right suddenly performs a cut-in maneuver, crossing into my lane directly in front of me. I must decelerate to maintain a safe following distance.

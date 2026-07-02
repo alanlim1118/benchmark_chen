@@ -1,0 +1,1 @@
+the ego car executes a u-turn at the intersection. Meanwhile, an adversarial object from the left crosses the street before the intersection node.

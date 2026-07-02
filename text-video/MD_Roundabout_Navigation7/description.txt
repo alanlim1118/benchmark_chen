@@ -1,0 +1,1 @@
+The ego vehicle travels straight and enters an urban, multi-lane roundabout junction under dark weather conditions. As the ego vehicle approaches and enters the roundabout, an adversary vehicle on the left side enters the roundabout at the same time, while another adversary vehicle is already navigating ahead within the roundabout.

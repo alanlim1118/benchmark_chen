@@ -1,0 +1,1 @@
+Approaching a roundabout from the left lane, the ego vehicle (green box) intends to make a right turn but is improperly positioned. To correct its route, the ego executes a lane change into the right lane, directly impacting and cuttting off an approaching adversary (yellow box) already occupying that lane.

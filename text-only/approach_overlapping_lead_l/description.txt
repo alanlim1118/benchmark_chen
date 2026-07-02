@@ -1,0 +1,1 @@
+the ego car travels straight forward within its lane. It approaches a leading adversarial object that is overlapping its lane to the left.

@@ -1,0 +1,1 @@
+In an urban environment, the ego car executes a left turn at a T-junction from a connecting side road. Meanwhile, an oncoming adversarial car travels straight down the main road, intersecting with the ego car's turning path.

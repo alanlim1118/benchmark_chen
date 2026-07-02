@@ -1,0 +1,1 @@
+the blue ego car executes a "lane change from oncoming traffic with leading vehicle" by steering from the left lane into the right lane. The pink adversarial cars represent the oncoming traffic approaching in the left lane and the leading vehicle traveling ahead in the right lane.

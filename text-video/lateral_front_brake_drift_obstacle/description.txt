@@ -1,0 +1,1 @@
+The ego vehicle is driving forward under nighttime, low-visibility conditions on a city street. The ego vehicle is forced under an emergency swerving scenario to avoid a braking passenger car, changing lanes to the right but ultimately hitting an illegally placed hazard obstacle sitting directly in the roadway.

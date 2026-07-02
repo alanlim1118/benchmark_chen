@@ -1,0 +1,3 @@
+Area: Urban
+Road Topology: 4-way intersection
+Description: I am positioned at a large urban junction intending to perform a left turn. A red adversary vehicle is coming from the opposite direction and proceeding straight through the intersection. My left-turn trajectory intercepts the straight path of the oncoming car, requiring me to yield and time my turn safely.

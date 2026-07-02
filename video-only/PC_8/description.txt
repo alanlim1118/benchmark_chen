@@ -1,0 +1,1 @@
+While attempting to pass straight through a 4-way intersection, the ego vehicle (green box) encounters crossing pedestrians along with multiple adversaries (yellow boxes) approaching from different arms of the junction. These intersecting movements require the ego vehicle to yield and carefully monitor the cross-traffic and pedestrian paths before safely continuing straight.

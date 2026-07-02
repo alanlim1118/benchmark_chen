@@ -1,0 +1,1 @@
+In an urban environment, the ego car drives straight forward along a multi-lane road structure. Meanwhile, an adversarial car occupies the adjacent straight lane just ahead of the ego car.

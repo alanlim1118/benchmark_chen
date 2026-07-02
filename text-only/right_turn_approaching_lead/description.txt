@@ -1,0 +1,1 @@
+the ego car initiates a right turn at the intersection. While turning, it approaches a leading adversarial object that is also turning right.

@@ -1,0 +1,1 @@
+the ego car executes a u-turn at the intersection. Meanwhile, an adversarial object approaching from the right passes straight through the crossing.

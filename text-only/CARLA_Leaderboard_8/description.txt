@@ -1,0 +1,1 @@
+CARLA_Leaderboard_8;The ego-vehicle encounters a vehicle merging into its lane from a highway on-ramp. The ego-vehicle must decelerate, brake or change lane to avoid a collision.

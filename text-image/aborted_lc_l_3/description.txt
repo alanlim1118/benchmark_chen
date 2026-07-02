@@ -1,0 +1,1 @@
+The blue ego car executes an aborted lane change left by curving toward the left lane before steering back into the center. Two pink adversarial cars travel straight in that left lane, acting as the lead object and following object during this maneuver.

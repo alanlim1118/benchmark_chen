@@ -1,0 +1,1 @@
+In an urban environment, the ego car travels straight forward toward a four-way intersection. An adversarial car is positioned directly ahead of the ego car in the same lane. As they reach the intersection, the adversarial car executes a left turn onto the cross street. Another adversarial car comes from the opposite direction at the same time.

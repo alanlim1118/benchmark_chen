@@ -1,0 +1,1 @@
+ego vehicle and the adversary vehicle are driving side-by-side making the same straight-through maneuver in a 4-way intersection, with the adversary overlapping into the ego vehicle's driving lane.

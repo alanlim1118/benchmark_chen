@@ -1,0 +1,1 @@
+The ego vehicle is driving straight through a wide road intersection under overcast daylight conditions. The vehicle is involved in a sudden rear-end collision when a passenger car turns right at the intersection directly into the ego vehicle's path and then unexpectedly decelerates.

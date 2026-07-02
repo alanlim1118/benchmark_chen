@@ -1,0 +1,12 @@
+### Environment and Road Structure
+
+* **Environment:** The scene is set in an **urban environment** featuring multi-story city buildings, a structured parking lot, and a small park.
+* **Road Structure:** The traffic participants are navigating a large **four-way intersection** with multiple lanes, highlighted by a complex overlay of vehicle trajectory paths.
+
+### Vehicle Behaviors
+
+* **Ego Vehicle:** The ego car is traveling straight forward from the bottom lane directly into the intersection.
+* **Adversarial Vehicles (7 total):** * **Leading Car:** Located directly ahead of the ego vehicle in the same lane, initiating a right-hand turn.
+* **Left-Side Cars:** Two adversarial cars are approaching the intersection from the left cross street.
+* **Right-Side Cars:** Two adversarial cars are moving along the right cross street toward the intersection.
+* **Oncoming Cars:** Two adversarial cars are approaching from the opposite direction, positioned near the overpass structure at the top of the frame.

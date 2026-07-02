@@ -1,0 +1,1 @@
+The ego vehicle executes a left turn at a 4-way intersection at night in an urban area. Multiple adversary vehicles approaching from the opposing arm proceed straight through the intersection, directly crossing the ego's intended path. The ego vehicle must yield to these oncoming adversaries and carefully time its maneuver to safely complete the left turn without conflict.

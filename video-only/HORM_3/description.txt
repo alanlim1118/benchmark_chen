@@ -1,0 +1,1 @@
+The ego vehicle is traveling down an on-ramp and merges onto a multi-lane straight road in a suburban area. A white car followed by a red truck are traveling on the main road to the rear-left of the ego vehicle, continuing straight in their lane. The presence of these oncoming vehicles requires the ego vehicle to safely time its merge ahead of them.

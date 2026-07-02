@@ -1,0 +1,1 @@
+the blue ego car travels straight forward within the left lane of the road. The pink adversarial car accelerates forward in the right lane, illustrating the scenario of an object passing right.

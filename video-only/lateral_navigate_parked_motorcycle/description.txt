@@ -1,0 +1,1 @@
+The ego vehicle is driving slowly on a busy commercial street on a clear day. The vehicle is involved in a sudden low-speed collision when a grey passenger van on the right cuts sharply into the ego vehicle's path to steer around a parked motorcycle blocking its lane.

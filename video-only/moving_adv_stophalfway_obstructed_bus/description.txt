@@ -1,0 +1,1 @@
+The ego vehicle is driving forward under clear daylight conditions on a multi-lane city street. The ego vehicle is forced under a sudden emergency swerving scenario when the passenger car directly ahead stops abruptly due to a turning vehicle blocking its path, causing the ego vehicle to veer into the adjacent left lane and side-swipe an oncoming car.

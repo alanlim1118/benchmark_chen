@@ -1,0 +1,114 @@
+scenario_id,description
+AnimalCrashWithoutPriorVehicleManeuver,"Vehicle is going straight in a rural area
+at night, under clear weather conditions, with a posted
+speed limit of 55 mph or more; and encounters an animal
+at a non-junction location."
+CBFA_BicycleFromFarSide,"a collision in which a vehicle travels forwards towards
+a bicyclist crossing its path cycling from the farside and the frontal structure of the vehicle strikes
+the bicyclist when no braking action is applied."
+CBNAO_BicycleNearSide,"a collision in which a vehicle travels
+forwards towards a bicyclist crossing its path cycling from the nearside from behind an obstruction
+and the frontal structure of the vehicle strikes the bicyclist when no braking action is applied."
+CCCscp_obstructed,"a collision in which a vehicle travels
+forwards along a straight path across a junction, towards a vehicle crossing the junction on a
+perpendicular path. The frontal structure of the vehicle under test strikes the side of the other
+vehicle."
+CPNCO_RunningChildFromNearSide,"a collision in which a vehicle travels
+forwards towards a child pedestrian crossing its path running from behind and obstruction from
+the nearside and the frontal structure of the vehicle strikes the pedestrian when no braking action
+is applied."
+DetectAndRespondToSchoolBus,"A vehicle equipped with an ADS feature is driving along a straight, undivided, multilane
+highway. It approaches a school bus that is stopped in an opposing lane, with lights and signs
+activated, to allow students to disembark."
+Following Vehicle Approaching a Stopped Lead Vehicle,"Vehicle is going straight in an urban
+area, in daylight, under clear weather conditions, at an
+intersection-related location with a posted speed limit of
+35 mph; and closes in on a stopped lead vehicle."
+FollowingVehicleMakingAManeuverAndApproachingLeadVehicle,"Vehicle is changing lanes or
+passing in an urban area, in daylight, under clear
+weather conditions, at a non-junction with a posted
+speed limit of 55 mph; and closes in on a lead
+vehicle."
+LowSpeedMerge,A vehicle equipped with an ADS feature is driving along a straight urban street with multiple lanes. It is approaching a necessary turn and needs to change lanes to position itself in the appropriate lane to make the turn.
+Vehicle Contacting Object with Prior Vehicle Maneuver,"Vehicle is leaving a parked position at night,
+in an urban area, under clear weather conditions, at a non-
+junction location with a posted speed limit of 25 mph; and
+collides with an object on road shoulder or parking lane."
+Vehicle Taking Evasive Action Without Prior Vehicle Maneuver,"Vehicle is going straight in an
+urban area, in daylight, under clear weather
+conditions, at a non-junction location with a posted
+speed limit of 35 mph; and takes an evasive action
+to avoid an obstacle."
+VehicleChangingLanes_VehiclesTravelingInSameDirection,"Vehicle is changing lanes in an
+urban area, in daylight, under clear weather
+conditions, at a non-junction with a posted speed limit
+of 55 mph or more; and then encroaches into anothe
+vehicle traveling in the same direction."
+VehicleMakingAManeuver_VehicleTravelingInOppositeDirection,"Vehicle is passing another
+vehicle in a rural area, in daylight, under clear
+weather conditions, at a non-junction with a posted
+speed limit of 55 mph or more; and encroaches i
+another vehicle traveling in the opposite direction."
+VehicleNotMakingAManeuver_VehicleTravelingInOppositeDirection,"Vehicle is going straight in a rural area, in
+daylight, under clear weather conditions, at a non-junction
+with a posted speed limit of 55 mph or more; and drifts and
+encroaches into another vehicle traveling in the opposite
+direction."
+aborted_enter_lead_l,Aborted lead entering from left
+approach_lat_entering_traffic_area_from_right_forward,Approach a laterally moving object entering the ego-traffic area from right forward
+approach_oncoming,Approach Oncoming object
+close_obj_side_in_intersection_left,"ego vehicle and the adversary vehicle are driving side-by-side making the same straight-through maneuver in a 4-way intersection, with the adversary overlapping into the ego vehicle's driving lane."
+diverging_lead_leaving_TA_after_node_l,Diverging leading object leaving ego-traffic area after the node left
+enter_parallel_reversing_left,Object entering parallel reversing from left
+exit_parallel_reversing_right,Object exiting parallel reversing to the right
+exit_turning_reversing_right,Object exiting turning reversing to the left
+intersection_lc_r,Lane change right in intersection
+lc_from_oc_3,Lane change from oncoming traffic with leading and following vehicles
+lc_r_2,Lane change right with following object
+left_turn_approaching_lead,Left turn approaching a leading object
+left_turn_with_obj_from_left_entering_before_node,Left turn with object from left entering before the node
+neighbor_entering_r,Object entering to the right side of ego
+parallel_entry_passing_straight_with_obj_right_making_u-turn,Parallel entry passing straight with object from right making u-turn
+pass_straight_with_obj_from_left_turning_left,Pass straight with object from left turning left
+pass_straight_with_oncoming_obj_turning_left,Pass straight with oncoming object turning left
+r11_town05_ins_sl,"Area: Urban
+Road Topology: 4-way intersection
+Description: I am traveling straight through a signalized urban intersection. A red adversary vehicle coming from the left is performing a left-hand turn, which intercepts my straight-line path in the middle of the junction. I must monitor this vehicle to avoid a collision as it enters my intended lane."
+r16_town05_ins_sl,"Area: Urban
+Road Topology: 4-way intersection
+Description: I am positioned at a large urban junction intending to perform a left turn. A red adversary vehicle is coming from the opposite direction and proceeding straight through the intersection. My left-turn trajectory intercepts the straight path of the oncoming car, requiring me to yield and time my turn safely."
+r1_town05_ins_c,"Area: Urban / City Edge
+Road Topology: Straight road
+Description: I am driving straight on a multi-lane road near a railway. A red adversary vehicle in the lane to my right suddenly performs a cut-in maneuver, crossing into my lane directly in front of me. I must decelerate to maintain a safe following distance."
+r21_town07_ins_sr,"Area: Rural
+Road Topology: 4-way intersection
+Description: I am turning left at a rural junction surrounded by trees and farmland. Simultaneously, a red adversary vehicle from the opposite side is also performing a left turn. Our paths cross within the center of the intersection, necessitating careful coordination to avoid a side-swipe or head-on collision."
+r26_town05_ins_chaos,"Area: Highly Urban
+Road Topology: 4-way intersection
+Description: I am attempting to navigate a complex, crowded intersection. Multiple adversaries are moving simultaneously: vehicles from the opposite side are turning left and going straight, while others from the side streets are entering the junction. My path intersects with several trajectories, including a red car turning left across my front and a green car coming straight."
+r31_town05_ins_oppo,"Area: Urban
+Road Topology: 4-way intersection
+Description: I am making a left turn at a city intersection. A yellow adversary vehicle approaching from the opposite direction is going straight. This vehicle's path intercepts my turn, and there is a red vehicle following closely behind me. I must manage the gap with the oncoming yellow car to complete the turn safely."
+r36_town05_ins_crosschange,"Area: Urban
+Road Topology: 4-way intersection
+Description: I am proceeding straight through an intersection. A pink adversary vehicle from the cross-street on the left is attempting a left turn to merge into the road I am on. I need to be aware of this vehicle as its maneuver could lead it to intercept my lane or merge closely behind/ahead of me."
+r40_town06_hw_c,"Area: Highway
+Road Topology: Straight road
+Description: I am driving in heavy traffic on a multi-lane highway. I am initiating a lane change to the left. I am surrounded by numerous adversaries in all lanes; I must find a sufficient gap in the left lane to merge without causing the vehicles behind or beside me to brake abruptly."
+r45_town06_hw_merge,"Area: Highway
+Road Topology: On-ramp / Merge
+Description: I am traveling on a highway on-ramp and need to merge into the main flow of traffic. Several adversaries (yellow, red, and green cars) are already established in the main highway lanes. I must accelerate to match their speed and merge into the flow of traffic without disrupting the existing vehicles."
+r46_town06_hw_c,"Area: Highway
+Road Topology: Straight road
+Description: I am navigating through dense highway traffic and need to move toward the left-most lanes. This requires performing successive lane changes across multiple lanes of traffic. I must constantly monitor the positions and speeds of the many adversaries moving straight around me to execute these maneuvers safely."
+r6_town07_ins_c,"Area: Rural
+Road Topology: 4-way intersection
+Description: I am approaching a junction on a two-lane road in a rural setting. I maneuver from my current position to go straight through the intersection. A red adversary vehicle is traveling parallel to me in the adjacent lane, also moving straight. I must maintain my lane integrity to avoid colliding with this side-by-side adversary."
+right_turn_standstill,Standstill while turning right
+right_turn_with_obj_from_right_turning_right,Right turn with object from right turning right
+right_turn_with_oncoming_obj_turning_right,Right turn with oncoming object turning right
+u-turn_following_lead,U-turn following leading object
+u-turn_with_obj_from_left_crossing_after_node,U-turn with object from left crossing after the node
+u-turn_with_obj_from_left_turning_right,U-turn with object from left turning right
+u-turn_with_obj_from_right_entering_after_node,U-turn with object from right entering after the node
+u-turn_with_oncoming_obj_passing_straight,"ego vehicle is performing a U-turn in a 4-way intersection while a purple oncoming vehicle proceeds straight, creating an intersecting path conflict."

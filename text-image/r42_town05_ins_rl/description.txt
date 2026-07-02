@@ -1,0 +1,11 @@
+Environment and Road Structure
+Environment: The scenario is set in an urban environment featuring a row of residential buildings, sidewalks, and landscaped green areas.
+
+Road Structure: The vehicles are navigating a T-junction where a multi-lane horizontal main road meets a vertical side street.
+
+Vehicle Behaviors
+Ego Vehicle: The ego car approaches from the left along the main road and executes a right-hand turn into the vertical side street.
+
+Adversarial Vehicles: * Primary Adversarial Car: Approaching from the right side of the main road, this adversarial car executes a left-hand turn into the same vertical side street, creating a conflicting path with the ego vehicle.
+
+Other Vehicles: Two additional cars are present in the scene, with one following directly behind the ego car and another trailing behind the primary adversarial car.

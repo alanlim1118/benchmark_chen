@@ -1,0 +1,1 @@
+the blue ego car travels straight forward within the middle lane. The pink adversarial car executes a "cut through from right" by crossing directly in front of the ego car's path from the right lane to the left lane.

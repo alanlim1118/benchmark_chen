@@ -1,0 +1,1 @@
+UN_R171_7;The ego vehicle follows a lead vehicle in a straight lane for over two seconds with a lateral offset of less than one meter, then ego vehicle successfully completes a full lane change maneuver involving a 3.5-meter lateral displacement into the adjacent lane

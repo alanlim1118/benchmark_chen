@@ -1,0 +1,1 @@
+At a 4-way intersection, the ego vehicle (green box) attempts to execute a left turn amidst cross-traffic. The ego must yield to and navigate around approaching adversaries (yellow boxes), including one traveling straight from the opposing arm and another approaching from the left arm.

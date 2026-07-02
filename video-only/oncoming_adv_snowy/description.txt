@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a narrow, snow-covered rural road under overcast winter daylight conditions. The vehicle is involved in a head-on or side-swipe collision when an oncoming light-colored passenger car loses traction on the icy road surface and skids directly into the ego vehicle's path.

@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a wet, two-lane rural road during a rainstorm. The vehicle is involved in a side-impact collision when an oncoming white passenger car attempts to overtake traffic, but aggressively cuts back into the ego vehicle's lane to avoid a catastrophic head-on collision with an oncoming vehicle.

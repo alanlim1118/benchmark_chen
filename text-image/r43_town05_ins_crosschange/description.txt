@@ -1,0 +1,11 @@
+Environment and Road Structure
+Environment: The scenario takes place in an urban environment, indicated by a multi-space parking lot, marked sidewalks, and city infrastructure.
+
+Road Structure: The vehicles are positioned at the entrance of a multi-lane four-way intersection.
+
+Vehicle Behaviors
+Ego Vehicle: The ego car is located at the left approach of the intersection, positioned in the upper lane next to the traffic line.
+
+Adversarial Vehicles (3 total): * Primary Adversarial Car: Positioned in the lower lane directly adjacent to the ego car, with its trajectory path showing a right-hand turn into the vertical cross street.
+
+Trailing Cars: The remaining two adversarial cars are following closely behind, with one situated directly behind the ego car and the other behind the primary adversarial car.

@@ -1,0 +1,1 @@
+A vehicle equipped with an ADS feature is driving along a straight urban street with multiple lanes. It is approaching a necessary turn and needs to change lanes to position itself in the appropriate lane to make the turn.

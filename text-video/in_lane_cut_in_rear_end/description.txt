@@ -1,0 +1,3 @@
+The ego vehicle is following a lane
+and another object is doing a cut-in
+that results in a rear-end conflict.

@@ -1,0 +1,1 @@
+CARLA_Leaderboard_10;The ego-vehicle must cross a lane of moving traffic to exit the highway at an off-ramp.

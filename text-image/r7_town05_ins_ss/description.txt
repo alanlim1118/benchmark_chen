@@ -1,0 +1,1 @@
+In an urban environment, the ego car travels straight through a four-way intersection. Meanwhile, an adversarial car proceeds straight from the cross street, cutting perpendicularly across the intersection.

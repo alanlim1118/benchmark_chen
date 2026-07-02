@@ -1,0 +1,1 @@
+The ego vehicle travels straight through a rural 4-way intersection under clear weather conditions. As the ego vehicle enters and proceeds across the junction, two adversary vehicles initially approaching from the right arm execute right turns.

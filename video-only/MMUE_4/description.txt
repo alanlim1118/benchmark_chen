@@ -1,0 +1,1 @@
+Approaching a T-junction from a minor road, the ego vehicle (green box) attempts to turn right onto the main road. However, its maneuver is blocked by a queue of adversaries (yellow boxes) arriving from the right arm, with some passing straight through and others intending to turn left into the minor road, forcing the ego vehicle to yield and wait until the junction clears.

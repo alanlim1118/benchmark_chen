@@ -1,0 +1,1 @@
+the ego car initiates a left turn at the intersection. Simultaneously, an oncoming adversarial object drives straight through the intersection from the opposite direction.

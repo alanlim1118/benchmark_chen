@@ -1,0 +1,1 @@
+the blue ego car executes a right turn at the intersection from the bottom lane. At the same time, a pink adversarial object crosses the street from the right side

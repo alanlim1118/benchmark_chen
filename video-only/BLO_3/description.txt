@@ -1,0 +1,1 @@
+On a straight road section between two 4-way intersections, the ego vehicle (green box) is heavily obstructed by a cluster of stopped or slow-moving adversaries (yellow boxes) directly ahead and to its sides. This traffic bottleneck completely blocks the ego's forward path, forcing it to remain stationary.

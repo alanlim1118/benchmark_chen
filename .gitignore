@@ -1,0 +1,14 @@
+# Video/image files (excluded per project decision)
+*.mp4
+*.png
+*.jpg
+*.jpeg
+
+# Oversized zip archives whose content is already duplicated in the
+# extracted directories, and which exceed GitHub's 100MB per-file limit
+video-only.zip
+text-video.zip
+
+# Python cache
+__pycache__/
+*.pyc

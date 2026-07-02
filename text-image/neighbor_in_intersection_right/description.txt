@@ -1,0 +1,1 @@
+the blue ego car travels straight forward through the intersection from the left lane. Simultaneously, the pink adversarial car moves straight ahead alongside it in the right lane, demonstrating an "object staying right in intersection" maneuver.

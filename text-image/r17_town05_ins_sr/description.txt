@@ -1,0 +1,1 @@
+In an urban environment, the ego car travels straight forward through a major intersection. Concurrently, an adversarial car enters from the right cross street and makes a right turn into the same direction ahead of the ego car.

@@ -1,0 +1,1 @@
+the blue ego car is positioned at the intersection while the pink adversarial car approaches from the left side. The pink vehicle then executes a "pass object on the left moving towards ego, turning right" maneuver by making a right turn into the downward street.

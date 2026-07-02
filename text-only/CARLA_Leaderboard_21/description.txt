@@ -1,0 +1,1 @@
+CARLA_Leaderboard_21;While performing a maneuver, the ego-vehicle encounters an obstacle in the road, either a pedestrian or a bicycle, and must perform an emergency brake or an avoidance maneuver.

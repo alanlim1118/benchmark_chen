@@ -1,0 +1,3 @@
+Area: Rural
+Road Topology: 4-way intersection
+Description: I am approaching a junction on a two-lane road in a rural setting. I maneuver from my current position to go straight through the intersection. A red adversary vehicle is traveling parallel to me in the adjacent lane, also moving straight. I must maintain my lane integrity to avoid colliding with this side-by-side adversary.

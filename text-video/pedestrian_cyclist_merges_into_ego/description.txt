@@ -1,0 +1,1 @@
+The ego vehicle is driving forward under clear daylight conditions through a rural road. The ego vehicle is forced under a sudden emergency braking and swerving scenario when a bicyclist riding along the right shoulder abruptly cuts left across the road without checking for traffic, resulting in a side or t-bone collision.

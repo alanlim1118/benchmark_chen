@@ -1,0 +1,1 @@
+NHTSA_PreCrash_27;Vehicle stops at a stop sign in a rural area, in daylight, under clear weather conditions, at an intersection with a posted speed limit of 35 mph; and proceeds to turn left against lateral crossing traffic

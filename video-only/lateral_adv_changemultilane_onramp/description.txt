@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a multi-lane highway ramp approaching a diverging road under clear daylight conditions. The vehicle is involved in a sudden side-impact collision when a passenger car aggressively cuts across the gore area from the right highway exit ramp to force its way back onto the main road directly into the ego vehicle's path.

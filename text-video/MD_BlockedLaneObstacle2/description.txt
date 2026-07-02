@@ -1,0 +1,1 @@
+The ego vehicle travels straight through an urban, multi-lane 4-way intersection under clear weather conditions behind a front vehicle. As the ego vehicle proceeds, the front vehicle that is initially driving suddenly brakes and stops moving in the lane ahead, while at the same time there are two vehicles driving straight on the right lane.

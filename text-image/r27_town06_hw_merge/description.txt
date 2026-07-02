@@ -1,0 +1,1 @@
+In a highway environment, the ego car travels straight forward along the main road structure. Meanwhile, an adversarial car drives along an entrance ramp to merge into the lane ahead of the ego car.

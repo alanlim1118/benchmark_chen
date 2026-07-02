@@ -1,0 +1,1 @@
+CARLA_Leaderboard_24;The ego-vehicle must exit a parallel parking bay into a flow of traffic.

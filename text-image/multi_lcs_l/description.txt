@@ -1,0 +1,1 @@
+the blue ego car executes "multiple lane changes left" by moving continuously from the right lane across to the left lane.

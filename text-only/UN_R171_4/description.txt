@@ -1,0 +1,1 @@
+UN_R171_4;While traveling on a straight section, the ego vehicle want to performs a lane change to overtake a lead vehicle but remains in its current lane because it detects a motorcycle filtering or approaching rapidly from behind in the adjacent lane, ensuring the target space is clear before moving.

@@ -1,0 +1,1 @@
+UN_R171_3;The ego vehicle initiates a driver-requested lane change on a multi-lane road, but must detect and yield to a high-speed vehicle approaching from the rear in the target lane, delaying the maneuver until the overtaking vehicle has safely passed.

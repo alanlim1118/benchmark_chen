@@ -1,0 +1,1 @@
+CARLA_Leaderboard_16;The ego-vehicle encounters a slow moving hazard blocking part of the lane. The ego-vehicle must brake or maneuver to avoid it next to a lane of traffic moving in the opposite direction.

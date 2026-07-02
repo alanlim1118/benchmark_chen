@@ -1,0 +1,1 @@
+CARLA_Leaderboard_17;The ego-vehicle encounters an oncoming vehicles invading its lane on a bend due to an obstacle. It must brake or maneuver to the side of the road to navigate past the oncoming traffic.

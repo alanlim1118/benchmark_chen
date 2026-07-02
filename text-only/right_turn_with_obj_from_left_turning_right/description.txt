@@ -1,0 +1,1 @@
+the ego car executes a right turn at the intersection. Simultaneously, an adversarial object approaching from the left also makes a right turn.

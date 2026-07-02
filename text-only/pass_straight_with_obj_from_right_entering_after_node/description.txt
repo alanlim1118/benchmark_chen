@@ -1,0 +1,1 @@
+the ego car travels straight forward through the intersection. Meanwhile, an adversarial object enters from the right side after the intersection node.

@@ -1,0 +1,1 @@
+The ego vehicle is traveling on a two-lane rural highway with an uphill curve on a clear day. The vehicle is involved in a near-miss or scraping side-swipe collision when it attempts to overtake a slower lead vehicle, which unexpectedly initiates its own overtaking maneuver to pass the even slower traffic ahead at the exact same time.

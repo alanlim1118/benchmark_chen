@@ -1,0 +1,1 @@
+The ego vehicle is turning left at an intersection on a clear day. The vehicle is hit when a truck coming from the left runs a red light, speeding straight through the intersection and crashing into the side of the ego vehicle.

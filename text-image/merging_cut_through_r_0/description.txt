@@ -1,0 +1,1 @@
+the blue ego car begins merging from the middle lane into the right lane. At the same time, the pink adversarial car ahead executes a "merging cut through right without following vehicle" maneuver by crossing directly down from the left lane into the right lane.

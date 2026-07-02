@@ -1,0 +1,91 @@
+The following is a summary of the **44 interactive scenarios** used in the Bench2Drive benchmark, including their names and definitions as described in the source material.
+
+# Bench2Drive Benchmark Scenarios
+
+| # | Scenario Name | Definition / Description |
+| :--- | :--- | :--- |
+| 1 | **ControlLoss** | The ego vehicle loses control due to poor road conditions and must recover to its original lane. |
+| 2 | **ParkingExit** | The ego vehicle exits a parallel parking bay into a flow of traffic. |
+| 3 | **ParkingCutIn** | The ego vehicle must slow down or brake for a vehicle exiting a parallel parking bay that cuts in front. |
+| 4 | **StaticCutIn** | Similar to ParkingCutIn, but involves a vehicle from a slow traffic flow in an adjacent lane cutting in front. |
+| 5 | **ParkedObstacle** | The ego vehicle encounters a parked vehicle blocking part of the lane and must change lanes into same-direction traffic. |
+| 6 | **ParkedObstacleTwoWays** | A version of ParkedObstacle where the ego vehicle must move into a lane with opposite-direction traffic to bypass the obstacle. |
+| 7 | **Construction** | The ego vehicle bypasses a construction site by temporarily deviating from its route into same-direction traffic. |
+| 8 | **ConstructionTwoWays** | The "TwoWays" version of the Construction scenario, requiring a move into opposite-direction traffic. |
+| 9 | **Accident** | The ego vehicle bypasses multiple accident cars occupying a significant length of the lane. |
+| 10 | **AccidentTwoWays** | A "TwoWays" version of Accident with a very short time window to bypass the obstacle. |
+| 11 | **HazardAtSideLane** | The ego vehicle encounters a slow-moving hazard and must brake or maneuver into a same-direction lane. |
+| 12 | **HazardAtSideLaneTwoWays** | Similar to HazardAtSideLane, but requires maneuvering next to a lane of opposite-direction traffic. |
+| 13 | **VehiclesDooropenTwoWays** | The ego vehicle must maneuver to avoid a parked vehicle that has opened its door into the lane. |
+| 14 | **DynamicObjectCrossing** | A pedestrian or bicycle suddenly crosses from behind a static prop, requiring a prompt hard brake. |
+| 15 | **ParkingCrossingPedestrian** | A pedestrian emerges from behind a parked vehicle; requires a faster reaction than DynamicObjectCrossing. |
+| 16 | **HardBrake** | A leading vehicle decelerates suddenly, requiring the ego vehicle to perform an emergency brake or maneuver. |
+| 17 | **YieldToEmergencyVehicle** | The ego vehicle must maneuver to allow an emergency vehicle coming from behind to pass. |
+| 18 | **InvadingTurn** | While the ego vehicle is turning right, an oncoming vehicle invades its lane, forcing a defensive maneuver. |
+| 19 | **PedestrianCrossing** | A group of pedestrians crosses a junction suddenly, ignoring traffic lights; the ego vehicle must wait. |
+| 20 | **VehicleTurningRoutePedestrian** | The ego vehicle encounters a pedestrian crossing while it is performing a maneuver. |
+| 21 | **VehicleTurningRoute** | Similar to scenario 20, but with a faster-moving bicycle, requiring an earlier brake. |
+| 22 | **BlockedIntersection** | The ego vehicle encounters a stopped vehicle while performing a maneuver and must avoid it. |
+| 23 | **SignalizedJunctionLeftTurn** | The ego vehicle performs an unprotected left turn at a signalized intersection, yielding to oncoming traffic. |
+| 24 | **SignalizedJunctionLeftTurnEnterFlow** | The ego vehicle performs an unprotected left turn and merges into opposite traffic. |
+| 25 | **NonSignalizedJunctionLeftTurn** | A non-signalized version of scenario 23, requiring negotiation without traffic lights. |
+| 26 | **NonSignalizedJunctionLeftTurnEnterFlow** | A non-signalized version of scenario 24. |
+| 27 | **SignalizedJunctionRightTurn** | The ego vehicle turns right at a signalized intersection and merges into traffic coming from the left. |
+| 28 | **NonSignalizedJunctionRightTurn** | A non-signalized version of scenario 27. |
+| 29 | **EnterActorFlows** | Special vehicles (e.g., police, ambulances) run a red light, forcing the ego vehicle to react or merge. |
+| 30 | **HighwayExit** | The ego vehicle crosses a lane of moving traffic to exit a highway via an off-ramp. |
+| 31 | **MergerIntoSlowTraffic** | The ego vehicle merges into slow traffic on a highway off-ramp. |
+| 32 | **MergerIntoSlowTrafficV2** | The ego vehicle merges into slow traffic from an on-ramp while driving on a highway. |
+| 33 | **InterurbanActorFlow** | The ego vehicle turns left off an interurban road, crossing a fast traffic flow. |
+| 34 | **InterurbanAdvancedActorFlow** | The ego vehicle turns left onto an interurban road, crossing one fast flow and merging into another. |
+| 35 | **HighwayCutIn** | A vehicle merges from an on-ramp into the ego vehicle's highway lane; the ego must adjust its speed. |
+| 36 | **CrossingBicycleFlow** | The ego vehicle must turn at an intersection while yielding to bicycles crossing from the left. |
+| 37 | **OppositeVehicleRunningRedLight** | A crossing vehicle runs a red light while the ego vehicle is going straight. |
+| 38 | **OppositeVehicleTakingPriority** | A non-signalized version of scenario 37. |
+| 39 | **VinillaNonSignalizedTurn** | A basic scenario for passing through a junction without lights or signs. |
+| 40 | **VinillaNonSignalizedTurnEncounterStopsign** | A basic scenario for learning to stop and start at stop signs. |
+| 41 | **VinillaSignalizedTurnEncounterGreenLight** | A basic scenario for passing through a signalized junction on a green light. |
+| 42 | **VinillaSignalizedTurnEncounterRedLight** | A basic scenario for passing through a signalized junction when the light turns red to green. |
+| 43 | **LaneChange** | A basic scenario for learning to change lanes safely and avoid collisions. |
+| 44 | **TJunction** | A basic scenario for learning to navigate through a T-junction. |
+
+# Supplementary Scenario Types (proposed, beyond the original Bench2Drive 44)
+
+The 44 types above are the original Bench2Drive benchmark set. While
+labeling `text-only/`, `text-image/`, `text-video/`, and `image-only/`
+against them (see `scenario_labels.md`), a recurring set of maneuvers
+and conflicts showed up across all four datasets that none of the 44
+types describe, forcing them into "No strong match" or a Weak-confidence
+fallback. Types 45-50 were drafted to close those gaps, continuing the
+existing numbering scheme. Type 51 (HeavyVehicle) was added afterward,
+specifically to resolve the one remaining unmatched `image-only/`
+scenario (`DetectAndRespondToSchoolBus`) — unlike 45-50, it's not drawn
+from a recurring pattern across all five directories, just this single
+case, so treat its generality with more caution than the others. None
+of types 45-51 are part of the official Bench2Drive benchmark — they
+are project-specific additions. Types 52-53 (JunctionEntryCutIn,
+HazardAvoidanceCutIn) were added later still, splitting off two
+recurring sub-patterns of StaticCutIn (4) that had grown to dominate the
+type. Type 54 (EmergencyObstacleAvoidance) splits off a sub-pattern of
+HardBrake (16): scenarios with no lead vehicle at all, or a non-vehicle
+hazard, as opposed to a lead vehicle actively decelerating. Types 55-56
+(OvertakingIntoOncomingLane, UnintentionalLaneDrift) split off two
+sub-patterns of LaneChange (43): an overtake that explicitly crosses
+into opposing traffic, and an unintentional drift, as opposed to a
+deliberate same-direction lane-change maneuver. See `plan.md` for the
+full rationale on all of these.
+
+| # | Scenario Name | Definition / Description |
+| :--- | :--- | :--- |
+| 45 | **ReversingManeuver** | The ego vehicle backs up (e.g., leaving a parking space, driveway, or alley) or must react to an adversary vehicle reversing toward or across its path, requiring low-speed maneuvering to avoid a collision with the reversing party. |
+| 46 | **UTurn** | The ego vehicle executes a u-turn at a junction or mid-block, negotiating oncoming, crossing, or following traffic that conflicts with the reversal of direction. |
+| 47 | **ParallelLaneTraffic** | The ego vehicle travels straight alongside an adversary vehicle moving in the same direction in a parallel lane, with no cut-in, crossing, or braking conflict between them — a benign co-travel baseline. |
+| 48 | **AdversaryCutOut** | A leading or adjacent adversary vehicle voluntarily exits or diverges away from the ego's lane or path — the inverse of StaticCutIn/HighwayCutIn — requiring the ego to monitor but not necessarily brake or maneuver. |
+| 49 | **RoundaboutNavigation** | The ego vehicle enters, circulates within, or exits a roundabout junction, yielding to or coordinating with adversary vehicles entering or already circulating in the roundabout. |
+| 50 | **AnimalOnRoad** | An animal unexpectedly enters or is present on the roadway, requiring the ego vehicle to brake or maneuver to avoid a collision, at a junction or non-junction location. |
+| 51 | **HeavyVehicle** | A basic scenario for the ego vehicle to learn to respond to heavy vehicles. |
+| 52 | **JunctionEntryCutIn** | An adversary vehicle turns from a cross-street, ramp, or side road into the ego vehicle's lane at or near a junction, becoming a leading vehicle the ego must follow at a safe distance. |
+| 53 | **HazardAvoidanceCutIn** | An adversary vehicle cuts into the ego vehicle's lane specifically to avoid an obstacle, hazard, or pedestrian in its own lane, requiring the ego to react to the sudden lane change. |
+| 54 | **EmergencyObstacleAvoidance** | The ego vehicle must brake or swerve suddenly for a hazard, obstacle, or non-vehicle actor (e.g., a cyclist, or a motorcyclist that has lost control) directly in its path, with no other vehicle actively decelerating as the stated trigger. |
+| 55 | **OvertakingIntoOncomingLane** | The ego vehicle passes a slower vehicle ahead by crossing into the opposing lane of traffic, distinct from a same-direction lane change. |
+| 56 | **UnintentionalLaneDrift** | A vehicle drifts out of its lane and encroaches into an adjacent lane without an intentional lane-change maneuver. |

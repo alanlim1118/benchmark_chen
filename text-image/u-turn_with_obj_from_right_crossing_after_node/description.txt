@@ -1,0 +1,1 @@
+the blue ego car executes a u-turn at the intersection from the bottom lane. Simultaneously, an adversarial object crosses the street.

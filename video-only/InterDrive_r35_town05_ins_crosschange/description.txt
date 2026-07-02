@@ -1,0 +1,1 @@
+Initially traveling in the left lane, the ego vehicle (green box) intends to change lanes to the right to execute a right turn at an upcoming 4-way intersection. However, it is forced to slow down and wait due to stationary or slow-moving adversaries (yellow boxes) blocking both its current lane directly ahead and the adjacent right lane, preventing an immediate lane change.

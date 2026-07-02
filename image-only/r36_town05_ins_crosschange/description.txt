@@ -1,0 +1,3 @@
+Area: Urban
+Road Topology: 4-way intersection
+Description: I am proceeding straight through an intersection. A pink adversary vehicle from the cross-street on the left is attempting a left turn to merge into the road I am on. I need to be aware of this vehicle as its maneuver could lead it to intercept my lane or merge closely behind/ahead of me.

@@ -1,0 +1,1 @@
+the ego car travels straight ahead through the intersection. Along its path, it passes an adversarial object that is standing still.

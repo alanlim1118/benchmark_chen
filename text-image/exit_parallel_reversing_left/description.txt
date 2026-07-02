@@ -1,0 +1,1 @@
+the blue ego car travels straight forward within the lower lane. Directly ahead, the pink adversarial car executes an "object exiting parallel reversing to the left" maneuver by backing up and curving toward the left lane.

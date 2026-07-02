@@ -1,0 +1,1 @@
+The ego vehicle travels along an on-ramp and merges left into a multi-lane highway under clear weather conditions. As the ego vehicle merges, a front vehicle ahead of it on the ramp also merges into the main highway lane, while an adversary vehicle already on the highway travels at the back of the target lane behind them.

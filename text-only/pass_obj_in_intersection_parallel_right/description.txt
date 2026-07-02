@@ -1,0 +1,1 @@
+the ego car drives straight forward through the intersection. In doing so, it passes an adversarial object moving parallel to it on the adjacent right lane, fulfilling the "pass object on the right parallel in intersection" scenario.

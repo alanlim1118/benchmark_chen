@@ -1,0 +1,1 @@
+the ego car executes a left turn at the intersection from the right lane. Simultaneously, an adversarial object entering parallel from the left lane proceeds straight ahead, illustrating the scenario of a parallel entry turning left with an object from the left passing straight.

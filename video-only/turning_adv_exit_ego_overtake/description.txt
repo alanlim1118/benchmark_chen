@@ -1,0 +1,1 @@
+The ego vehicle is driving forward on a two-lane residential road on an overcast day. The ego vehicle is involved in a sudden side-impact collision when the ittries to overtake a slow-moving grey sedan, which simultaneously turns left to exit the road, cutting directly into the ego vehicle's path.

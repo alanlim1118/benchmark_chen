@@ -1,0 +1,3 @@
+Area: Urban
+Road Topology: 4-way intersection
+Description: I am traveling straight through a signalized urban intersection. A red adversary vehicle coming from the left is performing a left-hand turn, which intercepts my straight-line path in the middle of the junction. I must monitor this vehicle to avoid a collision as it enters my intended lane.

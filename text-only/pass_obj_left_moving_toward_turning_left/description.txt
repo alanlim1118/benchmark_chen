@@ -1,0 +1,1 @@
+the ego car is positioned at the intersection. It passes an adversarial object on the left that is moving towards the ego while turning left.

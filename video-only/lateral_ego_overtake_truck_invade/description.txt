@@ -1,0 +1,1 @@
+The ego vehicle is traveling on a multi-lane roadway on a clear morning. The vehicle is involved in a sudden side-impact collision when it attempts to overtake a large cargo truck, which unexpectedly drifts to the left and invades the ego vehicle's lane.

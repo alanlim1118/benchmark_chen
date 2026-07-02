@@ -1,0 +1,1 @@
+The ego vehicle executes a left turn at an urban T-junction under dark weather conditions. As the ego vehicle enters the intersection, it must navigate a complex traffic flow involving several adversary vehicles: an adversary vehicle from the left arm proceeds straight across, while from the right arm, two vehicles pass straight through and another vehicle executes a left turn.

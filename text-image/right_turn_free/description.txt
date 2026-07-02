@@ -1,0 +1,1 @@
+the blue ego car executes a "free right turn" at the intersection, moving from the bottom right lane into the intersecting street.

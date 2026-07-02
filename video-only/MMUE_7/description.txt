@@ -1,0 +1,1 @@
+At a T-junction, the ego vehicle (green box) initiates a right-hand turn while an adversary (yellow box) approaching from the opposing arm simultaneously executes a left-hand turn into the same intersecting road.

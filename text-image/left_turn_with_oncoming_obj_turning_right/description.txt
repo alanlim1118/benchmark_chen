@@ -1,0 +1,1 @@
+the blue ego car enters the intersection to execute a left turn. The pink adversarial car approaches from the opposite direction and turns right, resulting in a left turn with oncoming object turning right.

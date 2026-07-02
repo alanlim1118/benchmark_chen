@@ -1,0 +1,1 @@
+the ego car steers toward the right lane before veering back into its original path to perform an aborted lane change right. Behind it, the adversarial car moves straight ahead in the adjacent right lane, acting as the following object in this scenario.

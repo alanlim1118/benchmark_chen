@@ -1,0 +1,1 @@
+The ego vehicle travels straight into an urban, multi-lane 4-way intersection under dark weather conditions. As the ego vehicle proceeds, it suddenly brakes to yield to a pedestrian crossing the intersection from left to right, while an adversary vehicle approaching from the left arm also enters the intersection.

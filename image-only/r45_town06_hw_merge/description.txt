@@ -1,0 +1,3 @@
+Area: Highway
+Road Topology: On-ramp / Merge
+Description: I am traveling on a highway on-ramp and need to merge into the main flow of traffic. Several adversaries (yellow, red, and green cars) are already established in the main highway lanes. I must accelerate to match their speed and merge into the flow of traffic without disrupting the existing vehicles.

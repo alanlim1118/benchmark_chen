@@ -1,0 +1,3 @@
+Area: Urban
+Road Topology: 4-way intersection
+Description: I am making a left turn at a city intersection. A yellow adversary vehicle approaching from the opposite direction is going straight. This vehicle's path intercepts my turn, and there is a red vehicle following closely behind me. I must manage the gap with the oncoming yellow car to complete the turn safely.

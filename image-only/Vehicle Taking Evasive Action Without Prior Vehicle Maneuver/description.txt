@@ -1,0 +1,5 @@
+Vehicle is going straight in an
+urban area, in daylight, under clear weather
+conditions, at a non-junction location with a posted
+speed limit of 35 mph; and takes an evasive action
+to avoid an obstacle.

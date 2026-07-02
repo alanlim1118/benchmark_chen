@@ -1,0 +1,1 @@
+the blue ego car drives straight forward within the middle lane. Ahead and to the left, the pink adversarial car executes an "object entering turning reversing from left" maneuver by backing up and curving into the adjacent lanes.
