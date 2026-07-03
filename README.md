@@ -45,7 +45,9 @@ These exist as a **quick-reference lookup** — a way to see every
 scenario's description in one place per directory without opening 50
 individual `description.txt` files. They're also the source of truth
 used when re-labeling or splitting types: descriptions are re-read from
-these CSVs rather than trusted from prior rationale text.
+these CSVs rather than trusted from prior rationale text. They stay
+untouched by labeling passes — see `label_csvs.py` below for the
+annotated version.
 
 ### `scenario_labels.md`
 The main labeling output. One section per source directory, each with:
@@ -76,6 +78,44 @@ Run this after any relabeling pass to regenerate `scenario_type_counts.json`.
 The latest output of `count_scenario_labels.py` — a snapshot of the
 label distribution across all 250 scenarios, at the time it was last
 regenerated.
+
+### `scenario_context_labels.md`
+A second annotation pass, independent of the type taxonomy: **road
+topology** (T-junction, 4-way intersection, on-ramp, off-ramp, straight
+road, curved road, roundabout) and **area** (urban, highway, rural), one
+section per source directory with the same `#`/scenario/value/value/
+evidence table shape as `scenario_labels.md`. Unlike type assignment,
+this dimension is **explicit-mention-only** — a value is recorded only
+when the literal word/phrase is present in the description (e.g. "a
+straight highway", "a T-junction"), never inferred from context. The one
+approved exception: a bare, unqualified "intersection"/"junction" (no
+"T-", "4-way", "roundabout", or on-/off-ramp qualifier, and not negated
+by "non-junction") defaults to **4-way intersection**. A blank cell
+means neither dimension was explicitly mentioned — expected for many
+rows under this strict rule (81 of 250 scenarios have neither). Near-
+synonyms actually present in the corpus (`suburban`, `city`, `town`,
+`village`, `downtown`, `residential`, `mountain`) are deliberately **not**
+treated as matches for the fixed area vocabulary.
+
+### `label_csvs.py` / `*_labeled.csv`
+`label_csvs.py` parses `scenario_labels.md` and `scenario_context_labels.md`
+and joins their columns onto each of the five source CSVs, writing a
+`<name>_labeled.csv` alongside each original (e.g.
+`text-only_labeled.csv`) with three added columns: `assigned_types`
+(multiple types joined with `"; "`; unmatched scenarios would read
+`"No strong match"`), `road_topology`, and `area` (both blank when
+neither was explicitly mentioned — not `"No strong match"`, since that
+phrase is specific to the type dimension). The five source `*.csv` files
+themselves are left untouched — they stay the raw-description source of
+truth described above.
+
+```
+python3 label_csvs.py [scenario_labels.md] [scenario_context_labels.md]
+```
+
+Run this after any relabeling pass to regenerate the `*_labeled.csv`
+files, the same way `count_scenario_labels.py` is re-run to regenerate
+`scenario_type_counts.json`.
 
 ### `plan.md`
 The taxonomy-rebalancing plan: analysis of *why* the label distribution

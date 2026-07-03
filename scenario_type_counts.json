@@ -35,8 +35,8 @@
   "InterurbanAdvancedActorFlow": 0,
   "HighwayCutIn": 5,
   "CrossingBicycleFlow": 0,
-  "OppositeVehicleRunningRedLight": 26,
-  "OppositeVehicleTakingPriority": 29,
+  "OppositeVehicleRunningRedLight": 10,
+  "OppositeVehicleTakingPriority": 13,
   "VinillaNonSignalizedTurn": 2,
   "VinillaNonSignalizedTurnEncounterStopsign": 4,
   "VinillaSignalizedTurnEncounterGreenLight": 0,
@@ -55,5 +55,7 @@
   "EmergencyObstacleAvoidance": 5,
   "OvertakingIntoOncomingLane": 6,
   "UnintentionalLaneDrift": 2,
+  "OncomingLeftTurnAcrossPath": 3,
+  "PerpendicularCrossingConflict": 15,
   "No strong match": 0
 }

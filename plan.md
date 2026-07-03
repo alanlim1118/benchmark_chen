@@ -23,14 +23,21 @@
 > and `BaselineFreeDriving` (previously Part D) were decided against and
 > moved to "Considered and rejected."
 >
-> **Status update:** Parts D (`StaticCutIn`), B (`HardBrake`), and C
-> (`LaneChange`) are now **IMPLEMENTED** — see each section for actual
-> vs. estimated results. All three came in close to or smaller than the
-> original rough estimates once every row was re-read from source CSVs
-> rather than trusted from prior rationale text; Part B also dropped one
-> of its two proposed types (`StoppedLeadVehicle`) entirely after the
-> re-read showed it would pull zero rows. Types now number 45-56. Only
-> Part A (Opposite* pair) remains a projection, not yet executed.
+> **Status update:** All four splits — D (`StaticCutIn`), B (`HardBrake`),
+> C (`LaneChange`), and now A (`OppositeVehicleRunningRedLight` /
+> `OppositeVehicleTakingPriority`) — are **IMPLEMENTED**. Part A came in
+> far below its original ~14-16/~10-12 estimate: re-reading all 33
+> source rows found only **3** clean `OncomingLeftTurnAcrossPath` cases
+> (most "oncoming" language in the corpus turned out to describe a
+> side-street/cross-street origin, not a same-road opposite-direction
+> vehicle) against **15** `PerpendicularCrossingConflict` cases, with 15
+> rows staying on the 37/38 fallback (dense multi-agent scenes, adversary
+> u-turns, and cases where the ego itself is turning rather than going
+> straight). Types now number 45-58. The 10 zero-count Bench2Drive types
+> have also been soft-flagged into a new `## Unused in this corpus`
+> section in `scenariotypes.txt`, per the "Open questions" decision
+> below. Every part of this plan is now executed; see each section for
+> actual vs. estimated results.
 
 ## Question being answered
 
@@ -120,29 +127,65 @@ for removal.
 
 ### A. Split `OppositeVehicleRunningRedLight` (37) / `OppositeVehicleTakingPriority` (38) — 55 combined uses, highest priority
 
+**Status: IMPLEMENTED.** All 33 rows carrying 37 and/or 38 were re-read
+from their source CSVs (not the original rough estimate) across all five
+directories.
+
 These two were stretched to cover perpendicular crossings, oncoming
 left-turns-across-path, right-turning adversaries, and multi-agent
 chaos scenes — four different geometries under one "priority conflict"
 umbrella. Split out:
 
-- **`OncomingLeftTurnAcrossPath`** — *An oncoming vehicle turns left
-  directly across the ego vehicle's straight-ahead path, at a signalized
-  or non-signalized junction.* This is literally NHTSA's own "Left Turn
-  Across Path from Opposite Direction" category — two `text-image/`
-  folders are already named after it verbatim. Estimated pull: ~14-16
-  scenarios (`CCFtap_10kph_30kph`, `pass_straight_with_oncoming_obj_turning_left`,
-  `r11_town05_ins_sl`, `r16_town05_ins_sl`, `r31_town05_ins_oppo`,
-  `oncoming_snowy_headon`, `turning_truck_runredlight`, etc.)
-- **`PerpendicularCrossingConflict`** — *A vehicle crosses the ego's
-  straight path from a perpendicular side street, running a red light or
-  violating a stop/yield sign.* Keeps closer to the original 37/38
-  wording. Estimated pull: ~10-12 scenarios (`CCCscp_obstructed`,
-  `r7_town05_ins_ss`, `MD_Pedestrian_Crosswalk10`,
-  `turning_intersection_both_straight`, etc.)
-- Keep 37/38 themselves as the fallback for genuinely ambiguous or
-  multi-conflict junction scenes (e.g. `r26_town05_ins_chaos`,
-  `MD_Intersection_Deadlock_Resolution2/6`, `IDR_5`) where no single
-  geometry dominates.
+- **`OncomingLeftTurnAcrossPath`** (added as type 57) — *An oncoming
+  vehicle turns left directly across the ego vehicle's straight-ahead
+  path, at a signalized or non-signalized junction.* This is literally
+  NHTSA's own "Left Turn Across Path from Opposite Direction" category.
+  **Actual pull: 3 scenarios** (`pass_obj_left_moving_toward_turning_left`,
+  `pass_straight_with_oncoming_obj_turning_left`, `oncoming_snowy_headon`)
+  — far below the ~14-16 estimate. The estimate over-counted because most
+  of its candidate list (`r11_town05_ins_sl`, `r16_town05_ins_sl`,
+  `r31_town05_ins_oppo`, `turning_truck_runredlight`) turned out on
+  re-read to describe an adversary approaching *from a side/cross
+  street* ("coming from the left," "from the right arm"), not a
+  same-road opposite-direction vehicle — the dataset's own naming
+  convention distinguishes `oncoming_obj` (genuinely opposite-direction)
+  from `obj_from_X` (side-street origin), and only rows using the former
+  phrasing qualified. `CCFtap_10kph_30kph` was also dropped from
+  consideration — it was never labeled 37/38 to begin with (it's ego
+  turning across an oncoming vehicle's path, the reverse geometry), so
+  it was out of scope for this pass.
+- **`PerpendicularCrossingConflict`** (added as type 58) — *A vehicle
+  crosses the ego's straight path from a perpendicular side street,
+  running a red light or violating a stop/yield sign.* **Actual pull: 15
+  scenarios** (`pass_straight_with_obj_from_right_crossing_before_node`,
+  `pass_straight_with_obj_from_right_entering_after_node`,
+  `pass_straight_with_obj_from_right_turning_left_intersecting`,
+  `pass_straight_with_obj_from_left_crossing_after_node`,
+  `pass_straight_with_obj_from_right_entering_before_node`,
+  `r7_town05_ins_ss`, `CMCscp_20kph_20kph_FS`,
+  `MD_Major_Minor_Unsignalized_Entry1`, `MD_Pedestrian_Crosswalk10`,
+  `CCCscp_obstructed`, `pass_straight_with_obj_from_left_turning_left`,
+  `r11_town05_ins_sl`, `r36_town05_ins_crosschange`,
+  `InterDrive_r13_town05_ins_sl`, `turning_intersection_both_straight`)
+  — well above the ~10-12 estimate, since this absorbed most of the
+  "from the left/right" side-street rows that the original estimate had
+  split toward `OncomingLeftTurnAcrossPath` instead.
+- 37/38 themselves kept as the fallback for genuinely ambiguous or
+  multi-conflict junction scenes (`r32_town05_ins_oppo`,
+  `r37_town05_ins_chaos`, `r26_town05_ins_chaos`,
+  `MD_Intersection_Deadlock_Resolution2/6`, `IDR_5`, `MMUE_3`, `PC_9`)
+  where no single geometry dominates, adversary-u-turn rows (a
+  documented separate gap — see "Still open" notes in
+  `scenario_labels.md`), and two rows where the ego itself is turning
+  rather than going straight (`NHTSA_Crash_15`, `turning_truck_runredlight`)
+  — both new types are framed around a straight-traveling ego, so these
+  don't cleanly fit either split. **15 rows remain on 37/38.**
+
+3 + 15 + 15 = 33, confirming no rows were dropped or double-counted.
+Verified in `scenario_type_counts.json`: `No strong match` stayed at 0,
+total row count stayed at 250. `OppositeVehicleRunningRedLight` narrowed
+from 26 to **10**; `OppositeVehicleTakingPriority` narrowed from 29 to
+**13**.
 
 ### B. Split `HardBrake` (16) — 27 uses
 
@@ -305,42 +348,49 @@ supported it) mattered more than hitting the pre-estimate.
 | StaticCutIn | 33 | → 3 types | **DONE: 19 / 7 / 7** (actual) |
 | HardBrake | 27 | → 2 types | **DONE: 22 / 5** (actual — `StoppedLeadVehicle` dropped) |
 | LaneChange | 31 | → 3 types | **DONE: 24 / 6 / 2** (actual) |
-| OppositeVehicleTakingPriority + RunningRedLight | 55 | → 3 types | ~20 / ~15 / ~11 (still projected) |
-| 10 zero-count types | 0 | flagged, not deleted | 0 (documented), still pending |
+| OppositeVehicleTakingPriority + RunningRedLight | 55 | → 4 types | **DONE: 10 / 13 / 3 / 15** (actual) |
+| 10 zero-count types | 0 | flagged, not deleted | **DONE** — moved to `## Unused in this corpus` in `scenariotypes.txt` |
 
 `AdversaryUTurn` and `BaselineFreeDriving` are omitted from this table —
 both were rejected (see "Considered and rejected"); their 4 and 2
 affected rows stay on existing labels.
 
-*The Opposite* row's "after" figures (~46) sum to less than the "before"
-figure (55) because many current rows carry both 37 and 38 simultaneously
-as a hedge against unstated signal state — after the split, a row that
-resolves to a specific geometry generally only needs one new label, so
-that double-counting collapses. This isn't a loss of information, just
-less redundant counting.*
+*The Opposite* row's "after" figures (10+13+3+15=41) sum to less than the
+"before" figure (55) for the same reason anticipated: many rows
+originally carried both 37 and 38 as a hedge against unstated signal
+state, and rows that resolved to one of the two new types generally only
+need a single label now, collapsing that redundant double-counting. This
+isn't a loss of information, just less redundant counting.*
 
-**Splits D, B, and C done.** Max single-type count is now 29
-(`OppositeVehicleTakingPriority`), down from the pre-split peak of 33
-(`StaticCutIn`). Only split A (Opposite* pair) remains a projection, not
-yet executed — once done, the max should drop to roughly 20. `No strong
-match` has stayed at 0 through all three completed splits, as expected
-(they only touched rows that already had a valid label).
+**All four splits (D, B, C, A) are done.** Max single-type count is now
+**24** (`LaneChange`), down from the pre-split peak of 33 (`StaticCutIn`).
+`No strong match` has stayed at 0 through all four splits, as expected
+(they only touched rows that already had a valid label); total row count
+has stayed at 250.
 
-**Consistent pattern across all three completed splits:** actual
-results came in close to, or smaller than, the original rough estimates
-every time a row was re-read from its source CSV instead of trusted
-from prior rationale text (`StaticCutIn`: 33→19/7/7 vs. ~16-18/~10-11/~5-6
-estimated; `HardBrake`: 27→22/5 vs. ~13-15/~6-7/~6-7 estimated, with one
-entire proposed type dropped; `LaneChange`: 31→24/6/2, close to the
-~22-23/~6-7/~2 estimate, plus one bonus catch from an adjacent type).
-This isn't a failure of the estimates — it's what happens when "the
-closest available type" assumptions get checked against the actual text
-rather than assumed. The `LaneChange` split also demonstrated a useful
-side effect: while re-reading for it, a mislabeled row from a *different*
-type (`InvadingTurn`) was caught and fixed too, because its description
-matched the new type better than its old one. Worth doing the same
-sweep — checking adjacent types, not just the one being split — for
-split A.
+**Consistent pattern across all four completed splits:** actual results
+came in close to, smaller than, or (once, for the fallback-heavy side of
+split A) larger than the original rough estimates every time a row was
+re-read from its source CSV instead of trusted from prior rationale text
+(`StaticCutIn`: 33→19/7/7 vs. ~16-18/~10-11/~5-6 estimated; `HardBrake`:
+27→22/5 vs. ~13-15/~6-7/~6-7 estimated, with one entire proposed type
+dropped; `LaneChange`: 31→24/6/2, close to the ~22-23/~6-7/~2 estimate,
+plus one bonus catch from an adjacent type; Opposite* split:
+`OncomingLeftTurnAcrossPath` landed at 3 against a ~14-16 estimate —
+the biggest miss of any split — because the original brainstorm
+conflated "adversary approaches from the left/right" with "oncoming,"
+when only rows using the dataset's own explicit `oncoming_obj` phrasing
+actually described a same-road opposite-direction vehicle;
+`PerpendicularCrossingConflict` absorbed the difference at 15 against a
+~10-12 estimate). This isn't a failure of the estimates — it's what
+happens when "the closest available type" assumptions get checked
+against the actual text rather than assumed. The `LaneChange` split
+demonstrated a useful side effect (a mislabeled row from a *different*
+type, `InvadingTurn`, was caught and fixed while re-reading); the
+Opposite* split's adjacent-type sweep (grepping all five CSVs for
+"oncoming"/"perpendicular"/"red light"/"failing to yield" outside the
+already-tagged rows) found no further strays, confirming the 37/38
+tagging itself had already caught every relevant row in prior passes.
 
 ## Implementation steps
 
@@ -354,33 +404,30 @@ split A.
    OvertakingIntoOncomingLane, 1 `LaneChange` row and 1 `InvadingTurn`
    row to UnintentionalLaneDrift).~~ **DONE.**
 4. ~~Regenerate `scenario_type_counts.json` after each split; confirm
-   row count still 250, `No strong match` still 0.~~ **DONE**, three
+   row count still 250, `No strong match` still 0.~~ **DONE**, four
    times.
-5. Remaining, not yet executed:
-   - Add the 2 new types for split A (`OncomingLeftTurnAcrossPath`,
-     `PerpendicularCrossingConflict`) to `scenariotypes.txt`, continuing
-     the numbering from 57 — re-verify each against source CSVs first,
-     not the original rough estimate.
-   - Move the 10 zero-count types into a new `## Unused in this corpus`
-     section in `scenariotypes.txt`, each with a one-line reason.
-   - Re-pass `scenario_labels.md` for every row currently labeled
-     `OppositeVehicleRunningRedLight` or `OppositeVehicleTakingPriority`
-     — same re-read-from-CSV methodology used for the other three
-     splits, and check adjacent types (e.g. rows currently on other
-     junction/crossing types) the way the `LaneChange` pass caught a
-     stray `InvadingTurn` row.
-   - Regenerate `scenario_type_counts.json` again; update each
-     directory's "Summary of coverage gaps."
+5. ~~Add `OncomingLeftTurnAcrossPath` (57) and `PerpendicularCrossingConflict`
+   (58) to `scenariotypes.txt`; relabel 18 of the 33 rows carrying 37/38
+   (3 to OncomingLeftTurnAcrossPath, 15 to PerpendicularCrossingConflict),
+   leaving 15 on the 37/38 fallback.~~ **DONE.**
+6. ~~Move the 10 zero-count types into a new `## Unused in this corpus`
+   section in `scenariotypes.txt`, each with a one-line reason.~~
+   **DONE.**
+7. ~~Regenerate `scenario_type_counts.json` again; update each
+   directory's "Summary of coverage gaps."~~ **DONE.**
 
-## Open questions for you
+All implementation steps are now complete — this plan has no remaining
+open work items.
 
-- Soft-flag vs. hard-delete the 10 zero-count types — I'm recommending
-  soft-flag (reversible), but this is a judgment call you may weigh
-  differently. Two corpus expansions have now confirmed they're
-  unused, which strengthens the case either way you land.
-- Whether to proceed with split A (Opposite* pair) — the last remaining
-  one. All three completed splits (D, B, C) came in close to or smaller
-  than estimated once every row was re-read from source, and B lost an
-  entire proposed type in the process; recommend applying the same
-  re-read-don't-estimate approach to A rather than adding its new types
-  on the strength of the original estimate alone.
+## Decisions made
+
+- **Soft-flag, not hard-delete, the 10 zero-count types** — implemented
+  as a `## Unused in this corpus` section in `scenariotypes.txt` with a
+  one-line reason per type, keeping them reversible and the file usable
+  outside this project.
+- **Proceed with split A** — implemented using the same
+  re-read-from-source methodology as splits B/C/D. As with those splits,
+  the actual results (3/15/15) diverged meaningfully from the original
+  rough estimate (~14-16/~10-12), reinforcing that re-reading source
+  text beats trusting prior rationale/brainstorm text when precision
+  matters.

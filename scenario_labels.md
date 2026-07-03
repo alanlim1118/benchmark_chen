@@ -48,11 +48,11 @@ Type numbers refer to the table in `scenariotypes.txt` (1 ControlLoss …
 | 31 | `pass_obj_in_intersection_parallel_right` | 47 ParallelLaneTraffic | Strong | Ego passes a parallel, same-direction object through an intersection with no described conflict — direct match to ParallelLaneTraffic. |
 | 32 | `pass_obj_left_moving_away_turning_left` | 48 AdversaryCutOut | Weak | Adversary turns left and moves away from ego (low conflict) — a turn-based departure rather than a lane-based cut-out, but the same "adversary voluntarily diverges away" concept as AdversaryCutOut. |
 | 33 | `pass_obj_left_moving_toward_making_u-turn` | 18 InvadingTurn, 38 OppositeVehicleTakingPriority | Weak | An oncoming vehicle unexpectedly maneuvering (u-turn) toward ego is loosely analogous to an invading/priority-violating oncoming vehicle. |
-| 34 | `pass_obj_left_moving_toward_turning_left` | 38 OppositeVehicleTakingPriority | Weak | Adversary turning left toward/across ego's path resembles a non-signalized priority conflict with a crossing vehicle. |
+| 34 | `pass_obj_left_moving_toward_turning_left` | 57 OncomingLeftTurnAcrossPath | Moderate | *(relabeled)* Description says the adversary is "moving towards the ego" while turning left — an oncoming vehicle turning left across ego's path, direct match to the new OncomingLeftTurnAcrossPath type, more precise than the generic OppositeVehicleTakingPriority fallback used previously. |
 | 35 | `pass_standstill` | 22 BlockedIntersection | Moderate | Ego passes a standing-still adversarial object while crossing an intersection — matches "stopped vehicle encountered while performing a maneuver." |
-| 36 | `pass_straight_with_obj_from_right_crossing_before_node` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | A crossing vehicle conflicts with ego going straight through the junction — matches the crossing-vehicle-vs-straight-ego pattern. |
-| 37 | `pass_straight_with_obj_from_right_entering_after_node` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Corrected: "after node" is a spatial reference (the adversary enters the roadway just past the junction area), not a timing cue that the ego has already cleared the conflict. Ego continues straight through and past the junction, so this is a real crossing conflict, structurally identical to `pass_straight_with_obj_from_right_crossing_before_node` (#36) just located on the far side of the intersection. |
-| 38 | `pass_straight_with_obj_from_right_turning_left_intersecting` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Adversary turns left across ego's straight path — classic crossing/priority-violation conflict. |
+| 36 | `pass_straight_with_obj_from_right_crossing_before_node` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Adversary crosses the street "from the right side" — a perpendicular side-street crossing of ego's straight path, direct match to the new PerpendicularCrossingConflict type, more precise than the generic Opposite* fallback used previously. |
+| 37 | `pass_straight_with_obj_from_right_entering_after_node` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Corrected: "after node" is a spatial reference (the adversary enters the roadway just past the junction area), not a timing cue that the ego has already cleared the conflict. Ego continues straight through and past the junction, so this is a real crossing conflict from the perpendicular right side, structurally identical to `pass_straight_with_obj_from_right_crossing_before_node` (#36) just located on the far side of the intersection — now matches PerpendicularCrossingConflict. |
+| 38 | `pass_straight_with_obj_from_right_turning_left_intersecting` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Adversary approaches "from the right" (a perpendicular side-street origin, per this dataset's naming convention distinguishing `obj_from_X` from `oncoming_obj`) and turns left across ego's straight path — matches PerpendicularCrossingConflict rather than an oncoming-vehicle geometry. |
 | 39 | `pass_straight_with_oncoming_obj_making_a_u-turn` | 38 OppositeVehicleTakingPriority | Weak | Oncoming vehicle u-turning while ego goes straight is loosely a priority/right-of-way conflict; no type explicitly covers adversary u-turns. |
 | 40 | `right_turn_approaching_lead` | 27 SignalizedJunctionRightTurn, 28 NonSignalizedJunctionRightTurn | Moderate | Ego turns right at a junction while approaching a leading vehicle also turning right — fits the right-turn junction family. |
 | 41 | `right_turn_with_obj_from_left_turning_left` | 27 SignalizedJunctionRightTurn, 28 NonSignalizedJunctionRightTurn | Strong | Ego turns right while merging with traffic from the left (the adversary turning left through the junction) — matches "merges into traffic coming from the left." |
@@ -103,9 +103,21 @@ Type numbers refer to the table in `scenariotypes.txt` (1 ControlLoss …
   actually a spatial reference — the adversary enters just past the
   junction area, not after the ego clears it in time. Since the ego
   continues straight through and past the junction, this is a real
-  crossing conflict and now maps to 37 OppositeVehicleRunningRedLight /
-  38 OppositeVehicleTakingPriority, the same as its `before_node`
-  sibling (#36).
+  crossing conflict, now mapped (with #36's split below) to
+  PerpendicularCrossingConflict.
+- **Update (Opposite\* split):** #34 (`pass_obj_left_moving_toward_turning_left`)
+  moved to the new OncomingLeftTurnAcrossPath type (57) — the adversary
+  is explicitly "moving towards the ego" (oncoming) while turning left.
+  #36, #37, and #38 (all `pass_straight_with_obj_from_right_*`) moved to
+  the new PerpendicularCrossingConflict type (58) — each describes an
+  adversary approaching "from the right," this dataset's naming
+  convention for a perpendicular side-street origin (as distinct from
+  `oncoming_obj`), crossing or turning across ego's straight path. The
+  remaining Opposite\*-labeled rows in this directory — #22
+  (`NHTSA_Crash_15`, ego is turning left, not going straight, so neither
+  new type's straight-ego framing fits), #33/#39 (adversary u-turns, a
+  documented separate gap, see "Still open" above) — stay on the generic
+  37/38 fallback. See `plan.md` Part A.
 - The `pass_obj_*` / `pass_straight_with_*` / `right_turn_with_obj_from_*`
   family (custom descriptive slugs) generally maps only loosely onto the
   Bench2Drive junction types, because those 44 types are defined by
@@ -157,8 +169,8 @@ match confidence scale.
 | 27 | `pass_obj_in_intersection_parallel_left` | 47 ParallelLaneTraffic | Strong | Ego and adversary drive straight in parallel through the intersection with no described conflict — direct match to ParallelLaneTraffic. |
 | 28 | `pass_obj_left_moving_toward_turning_right` | 38 OppositeVehicleTakingPriority | Weak | Adversary approaches from the left and turns right ahead of the ego at the intersection — a loose priority/right-of-way interaction, no exact type match. |
 | 29 | `pass_obj_right_moving_away_passing_straight` | 48 AdversaryCutOut | Weak | Adversary drives straight across from left to right, moving away from the ego with minimal conflict — a crossing-based departure, same "adversary voluntarily diverges away" concept as `pass_obj_left_moving_away_turning_left` in `text-only/`, now matching AdversaryCutOut. |
-| 30 | `pass_straight_with_obj_from_left_crossing_after_node` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Corrected: same as `pass_straight_with_obj_from_right_entering_after_node` in `text-only/` — "after node" is spatial (past the junction area), not a timing cue reducing conflict. Ego continues straight past the junction, so the adversary crossing there is a real conflict, matching the Opposite* crossing-vehicle-vs-straight-ego pattern. |
-| 31 | `pass_straight_with_obj_from_right_entering_before_node` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Adversary enters from the right *before* the ego's node — a genuine crossing conflict with a straight-traveling ego, matching `pass_straight_with_obj_from_right_crossing_before_node` in `text-only/`. |
+| 30 | `pass_straight_with_obj_from_left_crossing_after_node` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Corrected: same as `pass_straight_with_obj_from_right_entering_after_node` in `text-only/` — "after node" is spatial (past the junction area), not a timing cue reducing conflict. Ego continues straight past the junction, so the adversary crossing perpendicularly from the left is a real conflict, now matching PerpendicularCrossingConflict directly. |
+| 31 | `pass_straight_with_obj_from_right_entering_before_node` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Adversary enters from the right *before* the ego's node — a genuine perpendicular crossing conflict with a straight-traveling ego, matching `pass_straight_with_obj_from_right_crossing_before_node` in `text-only/`, direct match to PerpendicularCrossingConflict. |
 | 32 | `r12_town06_ins_sl` | 25 NonSignalizedJunctionLeftTurn, 44 TJunction | Strong | Ego turns left at a T-junction from a side road while oncoming traffic on the main road intersects its path — explicit T-junction unprotected left turn. |
 | 33 | `r17_town05_ins_sr` | 52 JunctionEntryCutIn | Strong | *(relabeled)* Adversary enters from the right cross street and turns right to merge ahead of the straight-traveling ego — direct match to the new JunctionEntryCutIn type, more precise than the generic StaticCutIn fallback used previously. |
 | 34 | `r22_town07_ins_sr` | 52 JunctionEntryCutIn | Strong | *(relabeled)* Adversary turns right from a T-junction side road into the ego's lane ahead of it — same junction-turn-entry pattern, direct match to JunctionEntryCutIn. |
@@ -168,7 +180,7 @@ match confidence scale.
 | 38 | `r37_town05_ins_chaos` | 22 BlockedIntersection, 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Weak | A dense multi-agent 4-way intersection (leading car turning right, cars from both cross streets, oncoming cars) exceeds what any single one of the 44 types describes; these three are the closest partial matches. |
 | 39 | `r42_town05_ins_rl` | 27 SignalizedJunctionRightTurn, 28 NonSignalizedJunctionRightTurn | Strong | Ego turns right from the main road into a side street while an adversary from the opposite direction turns left into the same side street — matches "merges into traffic coming from the left." |
 | 40 | `r43_town05_ins_crosschange` | 27 SignalizedJunctionRightTurn, 28 NonSignalizedJunctionRightTurn | Weak | An adjacent adversary in the intersection turns right into the cross street, but the ego's own maneuver is not stated explicitly, weakening the match to the right-turn junction family. |
-| 41 | `r7_town05_ins_ss` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Strong | Adversary proceeds straight from the cross street, cutting perpendicularly across the ego's straight path through the intersection — classic crossing-traffic conflict. |
+| 41 | `r7_town05_ins_ss` | 58 PerpendicularCrossingConflict | Strong | *(relabeled)* Adversary proceeds straight from the cross street, cutting perpendicularly across the ego's straight path through the intersection — near-verbatim match to the new PerpendicularCrossingConflict type. |
 | 42 | `right_turn_free` | 39 VinillaNonSignalizedTurn | Moderate | Ego makes a free right turn with no adversary or conflict described — closest to the basic, unopposed junction-passing scenario. |
 | 43 | `right_turn_with_obj_from_right_crossing_before_node` | 27 SignalizedJunctionRightTurn, 28 NonSignalizedJunctionRightTurn | Weak | Ego turns right while an adversary crosses from the right (not the left, as in the type definitions) — same structural mismatch as `right_turn_with_obj_from_right_passing_straight` in `text-only/`. |
 | 44 | `Straight Crossing Paths at Non-Signalized Junctions` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority, 40 VinillaNonSignalizedTurnEncounterStopsign | Moderate | Vehicle stops at a stop sign then proceeds against lateral crossing traffic — combines the stop-sign basic scenario with a crossing-traffic conflict. |
@@ -210,8 +222,22 @@ match confidence scale.
   was originally marked "No strong match" on the same mistaken
   "after node = after ego passes, low conflict" assumption corrected in
   the `text-only/` summary above. It's a spatial reference to the
-  junction area, not a timing cue — now maps to 37
-  OppositeVehicleRunningRedLight / 38 OppositeVehicleTakingPriority.
+  junction area, not a timing cue — now maps directly to the new
+  PerpendicularCrossingConflict type (58), folded into the split below.
+- **Update (Opposite\* split):** #30 and #31 (both
+  `pass_straight_with_obj_from_*_before/after_node`) and #41
+  (`r7_town05_ins_ss`, explicit "cutting perpendicularly") moved to the
+  new PerpendicularCrossingConflict type (58) — all describe a vehicle
+  crossing from a side street/cross street across ego's straight path.
+  The remaining Opposite\*-labeled rows in this directory — #28
+  (adversary turns *right*, away from ego, no type fits), #37
+  (`r32_town05_ins_oppo`, an ambiguous mix of a same-lane leading vehicle
+  turning off plus a separately-described oncoming car with no stated
+  maneuver), #38 (`r37_town05_ins_chaos`, 7-adversary dense scene), and
+  #44 (`Straight Crossing Paths at Non-Signalized Junctions`, where it's
+  the *ego* proceeding against crossing traffic at a stop sign, not an
+  adversary violation, so neither new type's "adversary violates" framing
+  fits) — stay on the generic 37/38 fallback. See `plan.md` Part A.
 - **No dedicated type exists (still unresolved)** for: entering (rather
   than exiting) a parking area (#22, `MoveOutOfTravelLane`) — none of
   the seven supplementary types cover a vehicle voluntarily leaving
@@ -246,7 +272,7 @@ naming convention.
 | 2 | `CCFhol` | 18 InvadingTurn | Weak | Oncoming vehicle intentionally moves into the ego's lane to overtake, causing a frontal collision — same lane-invasion concept as InvadingTurn, but ego is going straight, not turning. |
 | 3 | `CCFtap_10kph_30kph` | 23 SignalizedJunctionLeftTurn, 25 NonSignalizedJunctionLeftTurn | Strong | Ego turns across the path of a constant-speed oncoming vehicle — the core unprotected-left-turn-yield conflict. |
 | 4 | `CCRm_50kph` | 16 HardBrake | Weak | Ego strikes the rear of a constant-speed lead vehicle — same closing-speed pattern as `NHTSA_PreCrash_20`/Following-Vehicle folders, mapped Weak to HardBrake. |
-| 5 | `CMCscp_20kph_20kph_FS` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Ego travels straight across a junction and strikes a motorcyclist crossing perpendicular — a crossing-traffic conflict with a two-wheeler instead of a car. |
+| 5 | `CMCscp_20kph_20kph_FS` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Ego travels straight across a junction and strikes a motorcyclist "crossing the junction on a perpendicular path" — near-verbatim match to PerpendicularCrossingConflict, with a two-wheeler instead of a car. |
 | 6 | `CMRb_50kph` | 16 HardBrake | Strong | Ego strikes the rear of a motorcyclist that was at constant speed and then decelerates — direct match to "leading vehicle decelerates suddenly." |
 | 7 | `CPFA_50_50kph` | 14 DynamicObjectCrossing | Strong | Pedestrian suddenly runs across the ego's path from the far side, struck due to no braking — matches the sudden-pedestrian-crossing definition. |
 | 8 | `CPNA_25_50kph` | 14 DynamicObjectCrossing | Strong | Pedestrian walks across the ego's path from the near side, struck due to no braking — same sudden-crossing pattern. |
@@ -272,10 +298,10 @@ naming convention.
 | 28 | `MD_Interdriver36` | 43 LaneChange | Strong | Ego changes lanes toward the right to prepare a turn and must yield to adversaries already driving in the target lane — direct lane-change-yield match. |
 | 29 | `MD_Intersection_Deadlock_Resolution2` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Weak | Dense multi-agent 4-way intersection with several simultaneous turning/crossing adversaries — exceeds any single type's scope; these are the closest partial matches. |
 | 30 | `MD_Intersection_Deadlock_Resolution6` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Weak | Same reasoning as #29 — complex multi-adversary junction interaction. |
-| 31 | `MD_Major_Minor_Unsignalized_Entry1` | 44 TJunction, 38 OppositeVehicleTakingPriority | Moderate | Ego passes straight through a T-junction while an adversary from the minor right arm turns left onto the main road — non-signalized minor-road entry conflict. |
+| 31 | `MD_Major_Minor_Unsignalized_Entry1` | 44 TJunction, 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Ego passes straight through a T-junction while an adversary emerging from the minor right arm turns left onto the main road — a perpendicular side-street entry crossing the ego's straight path, direct match to PerpendicularCrossingConflict. |
 | 32 | `MD_Major_Minor_Unsignalized_Entry2` | 25 NonSignalizedJunctionLeftTurn, 44 TJunction | Moderate | Ego turns left at a T-junction amid multiple adversaries proceeding straight/turning from both arms — non-signalized left-turn negotiation. |
 | 33 | `MD_Major_Minor_Unsignalized_Entry5` | 44 TJunction, 14 DynamicObjectCrossing | Moderate | Ego passes through a T-junction; a pedestrian crosses ahead of it before the junction, and an adversary turns left into the main road — combines a T-junction entry with a pedestrian-crossing conflict. |
-| 34 | `MD_Pedestrian_Crosswalk10` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Several adversary vehicles cross the ego's path at a 4-way intersection (the pedestrian present stays clear of the road) — the operative conflict is crossing traffic. |
+| 34 | `MD_Pedestrian_Crosswalk10` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Two adversary vehicles cross the ego's path from right to left at a 4-way intersection (a third oncoming vehicle just proceeds straight, not a distinct conflict on its own; the pedestrian stays clear of the road) — the dominant, stated conflict is the perpendicular crossing traffic, direct match to PerpendicularCrossingConflict. |
 | 35 | `MD_Pedestrian_Crosswalk5` | 19 PedestrianCrossing | Strong | Ego suddenly brakes to yield to a pedestrian crossing the intersection — direct match. |
 | 36 | `MD_Roundabout_Navigation2` | 49 RoundaboutNavigation | Strong | Ego enters a roundabout while adversaries enter/navigate alongside it — direct match to the new RoundaboutNavigation type. |
 | 37 | `MD_Roundabout_Navigation4` | 16 HardBrake | Moderate | The front vehicle ego follows into the roundabout suddenly stops to yield to other adversaries, forcing the ego to brake — matches the sudden-lead-vehicle-stop pattern, though the roundabout setting itself isn't covered. |
@@ -352,6 +378,16 @@ naming convention.
   given Weak matches to the closest crossing/junction type rather than
   left unmatched, since a real conflict is present even if the type
   taxonomy doesn't capture its full complexity.
+- **Update (Opposite\* split):** #5 (`CMCscp_20kph_20kph_FS`), #31
+  (`MD_Major_Minor_Unsignalized_Entry1`), and #34
+  (`MD_Pedestrian_Crosswalk10`) moved to the new
+  PerpendicularCrossingConflict type (58) — each describes a vehicle
+  crossing the ego's straight path from a perpendicular side street/arm.
+  #29 and #30 (`MD_Intersection_Deadlock_Resolution2/6`) stay on the
+  generic 37/38 fallback — both are genuinely dense multi-adversary
+  scenes (simultaneous left- and right-arm turns plus a straight-through
+  adversary) with no single dominant geometry, exactly the "keep as
+  fallback" case `plan.md` Part A calls out. See `plan.md` Part A.
 - The Euro NCAP/AEB-style codes (`CBLA`, `CCFhol`, `CCFtap`, `CCRm`,
   `CMCscp`, `CMRb`, `CPFA`, `CPNA`, `CPTA`) map cleanly onto pedestrian-
   crossing, junction-left-turn, and lead-vehicle-braking types when the
@@ -386,7 +422,7 @@ accordingly.
 | 4 | `approach_oncoming` | 18 InvadingTurn | Weak | Generic "approach oncoming object" label; too sparse to confirm an invasion, but lane-invasion (InvadingTurn) is the closest oncoming-conflict type. |
 | 5 | `CBFA_BicycleFromFarSide` | 14 DynamicObjectCrossing | Strong | Bicyclist crosses the ego's path from the far side and is struck with no braking — near-literal match to the "pedestrian or bicycle suddenly crosses" definition. |
 | 6 | `CBNAO_BicycleNearSide` | 14 DynamicObjectCrossing | Strong | Bicyclist crosses from the nearside from behind an obstruction — matches the DynamicObjectCrossing definition ("crosses from behind a static prop") almost verbatim. |
-| 7 | `CCCscp_obstructed` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Strong | Ego travels straight across a junction and is struck on the side by a vehicle crossing perpendicular — classic crossing-traffic-vs-straight-ego conflict, visibility obstructed. |
+| 7 | `CCCscp_obstructed` | 58 PerpendicularCrossingConflict | Strong | *(relabeled)* Ego travels straight across a junction and is struck on the side by a vehicle "crossing the junction on a perpendicular path" — near-verbatim match, visibility obstructed. |
 | 8 | `close_obj_side_in_intersection_left` | 11 HazardAtSideLane | Moderate | *(description updated)* Ego and adversary drive side-by-side making the same straight-through maneuver in a 4-way intersection, with the adversary overlapping into the ego's lane — a partial-lane-encroachment hazard, matching the same "overlapping" pattern as `follow_overlapping_l`/`approach_lat_crossing_traffic_area_from_right` elsewhere in this project. The original vague text ("lateral close distance event") gave no maneuver to match against; the clarified description now supports a real label. |
 | 9 | `CPNCO_RunningChildFromNearSide` | 14 DynamicObjectCrossing, 15 ParkingCrossingPedestrian | Strong | A child runs from behind an obstruction on the nearside and is struck with no braking — matches DynamicObjectCrossing directly; ParkingCrossingPedestrian noted as a secondary possibility if the obstruction is a parked vehicle. |
 | 10 | `DetectAndRespondToSchoolBus` | 51 HeavyVehicle | Strong | Ego must respond to a stopped, signaling school bus in the opposing lane — direct match to the new HeavyVehicle type, added specifically to cover this previously-unmatched case. |
@@ -404,15 +440,15 @@ accordingly.
 | 22 | `LowSpeedMerge` | 31 MergerIntoSlowTraffic, 32 MergerIntoSlowTrafficV2 | Weak | No `description.txt` exists for this folder — labelled from the folder name alone, which suggests a low-speed merge onto a slower traffic flow; confidence is capped at Weak due to the missing description. |
 | 23 | `neighbor_entering_r` | 4 StaticCutIn | Moderate | "Object entering to the right side of ego" — same adjacent-lane-entry pattern as `enter_lead_r` in `text-only/`. |
 | 24 | `parallel_entry_passing_straight_with_obj_right_making_u-turn` | 38 OppositeVehicleTakingPriority | Weak | Ego passes straight while an adversary from the right makes a u-turn — adversary u-turns aren't covered by any of the 44 types, so the generic priority-conflict type is the closest fallback. |
-| 25 | `pass_straight_with_obj_from_left_turning_left` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Ego passes straight through a junction while an adversary from the left turns left across its path — matches the crossing-vehicle-vs-straight-ego pattern from `text-only/`. |
-| 26 | `pass_straight_with_oncoming_obj_turning_left` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Strong | Textbook case: ego goes straight while an oncoming adversary turns left across its path — the core conflict both types describe. |
-| 27 | `r11_town05_ins_sl` | 37 OppositeVehicleRunningRedLight | Moderate | Ego travels straight through a signalized intersection while an adversary from the left turns left and intercepts its path — matches the crossing-vehicle-at-signalized-junction pattern, though red-light-running specifically isn't stated. |
+| 25 | `pass_straight_with_obj_from_left_turning_left` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Ego passes straight through a junction while an adversary "from the left" (a perpendicular side-street origin, per this dataset's naming convention) turns left across its path — direct match to PerpendicularCrossingConflict. |
+| 26 | `pass_straight_with_oncoming_obj_turning_left` | 57 OncomingLeftTurnAcrossPath | Strong | *(relabeled)* Textbook case: ego goes straight while an explicitly "oncoming" adversary turns left across its path — near-verbatim match to the new OncomingLeftTurnAcrossPath type. |
+| 27 | `r11_town05_ins_sl` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Ego travels straight through a signalized intersection while an adversary "coming from the left" turns left and intercepts its path — a side-street origin turning across ego's path, matching PerpendicularCrossingConflict; kept Moderate since red-light-running specifically isn't stated. |
 | 28 | `r16_town05_ins_sl` | 23 SignalizedJunctionLeftTurn | Strong | Ego turns left at a signalized junction and must yield to an oncoming vehicle proceeding straight — textbook unprotected-left-turn-yield conflict. |
 | 29 | `r1_town05_ins_c` | 4 StaticCutIn | Strong | An adversary in the adjacent right lane cuts directly in front of the ego, requiring deceleration — direct adjacent-lane cut-in match. |
 | 30 | `r21_town07_ins_sr` | 25 NonSignalizedJunctionLeftTurn | Moderate | Ego turns left at a rural (non-signalized) junction while an opposing adversary simultaneously turns left, paths crossing in the center — unprotected left-turn negotiation, though the "both turning left" geometry isn't explicit in the type definition. |
 | 31 | `r26_town05_ins_chaos` | 22 BlockedIntersection, 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Weak | A dense multi-agent intersection (adversaries turning left, going straight, and entering from side streets simultaneously) exceeds any single type's scope, same treatment as `r37_town05_ins_chaos` in `text-image/`. |
 | 32 | `r31_town05_ins_oppo` | 23 SignalizedJunctionLeftTurn | Strong | Ego turns left at a city intersection while an oncoming adversary goes straight and intercepts the turn — classic left-turn-yield conflict (the trailing vehicle behind ego is incidental). |
-| 33 | `r36_town05_ins_crosschange` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Ego proceeds straight through an intersection while an adversary from the left cross-street attempts a left turn to merge into the ego's road — crossing/merging conflict with a straight-traveling ego. |
+| 33 | `r36_town05_ins_crosschange` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Ego proceeds straight through an intersection while an adversary from the left cross-street attempts a left turn to merge into the ego's road — explicit cross-street origin, direct match to PerpendicularCrossingConflict. |
 | 34 | `r40_town06_hw_c` | 43 LaneChange | Strong | Ego initiates a left lane change in heavy highway traffic and must find a gap among numerous adversaries — direct, if dense, lane-change scenario. |
 | 35 | `r45_town06_hw_merge` | 32 MergerIntoSlowTrafficV2 | Strong | Ego merges from a highway on-ramp into an established main-lane traffic flow — same family as `MD_Highway_On-Ramp_Merge2/6` in `text-video/`. |
 | 36 | `r46_town06_hw_c` | 43 LaneChange | Strong | Ego performs successive lane changes across multiple highway lanes toward the left-most lanes — matches the multi-lane-change pattern of `multi_lcs_l` in `text-image/`. |
@@ -474,6 +510,17 @@ accordingly.
   Note that HeavyVehicle was motivated by this single instance rather
   than a recurring pattern (unlike 45-50) — see the caveat in
   `scenariotypes.txt`.
+- **Update (Opposite\* split):** #7 (`CCCscp_obstructed`, explicit
+  "perpendicular path"), #25 (`pass_straight_with_obj_from_left_turning_left`),
+  #27 (`r11_town05_ins_sl`), and #33 (`r36_town05_ins_crosschange`,
+  explicit "cross-street") moved to the new PerpendicularCrossingConflict
+  type (58). #26 (`pass_straight_with_oncoming_obj_turning_left`,
+  explicitly "oncoming") moved to the new OncomingLeftTurnAcrossPath type
+  (57). The remaining Opposite\*-labeled rows in this directory — #24
+  (`parallel_entry_passing_straight_with_obj_right_making_u-turn`, an
+  adversary u-turn, the same documented gap as `text-only/`'s #33/#39)
+  and #31 (`r26_town05_ins_chaos`, a dense multi-agent scene) — stay on
+  the generic 37/38 fallback. See `plan.md` Part A.
 - `LowSpeedMerge` (#22) is missing its `description.txt` entirely and
   was labelled from the folder name alone; this is a data-completeness
   gap in the source directory, not a taxonomy gap, and the confidence
@@ -513,7 +560,7 @@ confidence and no unmatched rows in this pass.
 | 4 | `HORM_7` | 32 MergerIntoSlowTrafficV2 | Strong | Same on-ramp merge pattern, here maintaining following distance behind a single lead vehicle on the main road. |
 | 5 | `IDR_3` | 52 JunctionEntryCutIn, 40 VinillaNonSignalizedTurnEncounterStopsign | Strong/Moderate | *(relabeled)* Ego is at a stop-sign-controlled lane going straight while an adversary from the left cross-street turns left into the same target road ahead — direct match to JunctionEntryCutIn, combined with the stop-sign basic scenario. |
 | 6 | `IDR_5` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | Dense night-time intersection: an oncoming vehicle turns left across the ego's path while several more enter from the left cross-street — multiple simultaneous crossing conflicts, closest to the Opposite* priority-violation family. |
-| 7 | `InterDrive_r13_town05_ins_sl` | 37 OppositeVehicleRunningRedLight | Moderate | Ego goes straight through a 4-way intersection while an adversary from the right arm executes a sharp left turn crossing into its path — matches the crossing-vehicle-vs-straight-ego pattern, same as `r11_town05_ins_sl` in `image-only/`. |
+| 7 | `InterDrive_r13_town05_ins_sl` | 58 PerpendicularCrossingConflict | Moderate | *(relabeled)* Ego goes straight through a 4-way intersection while an adversary from the right arm executes a sharp left turn crossing into its path — explicit side-arm origin, direct match to PerpendicularCrossingConflict, same family as `r11_town05_ins_sl` in `image-only/`. |
 | 8 | `InterDrive_r19_town05_ins_sr` | 52 JunctionEntryCutIn, 40 VinillaNonSignalizedTurnEncounterStopsign | Strong/Moderate | *(relabeled)* Ego at a stop-sign lane going straight; adversary from the right cross-street turns right into the same target lane ahead, becoming a leading vehicle — direct match to JunctionEntryCutIn, combined with the stop-sign basic scenario. |
 | 9 | `InterDrive_r1_town05_ins_c` | 22 BlockedIntersection, 43 LaneChange | Moderate | A stationary vehicle blocks ego's lane at an intersection stop line; ego waits, then performs a left lane change once clear — combines a blocked-vehicle encounter with the subsequent lane-change maneuver. |
 | 10 | `InterDrive_r35_town05_ins_crosschange` | 43 LaneChange | Strong | Ego must slow and wait to change lanes right (to set up a right turn) because stationary/slow adversaries block both the current and target lanes — direct lane-change-yield match, same family as `MD_Interdriver36` in `text-video/`. |
@@ -547,14 +594,14 @@ confidence and no unmatched rows in this pass.
 | 38 | `moving_front_suddenbrake_yellow` | 16 HardBrake | Strong | The front vehicle abruptly brakes as the light turns yellow despite already being in the intersection, causing a rear-end collision — direct match. |
 | 39 | `moving_sudden_enter_adv` | 52 JunctionEntryCutIn | Strong | *(relabeled)* A car pulls out from a left-hand junction to turn into the ego's lane, its approach obstructed by oncoming traffic — direct match to JunctionEntryCutIn. |
 | 40 | `oncoming_adv_snowy` | 18 InvadingTurn | Moderate | An oncoming car loses traction on an icy road and skids into the ego's path — matches the lane-invasion outcome of InvadingTurn, though the cause (loss of control on ice) differs from a typical intentional overtake-invasion. |
-| 41 | `oncoming_snowy_headon` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Moderate | An oncoming taxi turns left directly across the ego's path on a snow-covered street, and the ego's forced swerve (rather than brake, due to low traction) results in a further head-on collision — the core conflict is an oncoming vehicle turning across a straight-traveling ego's path, closest to the Opposite* family. |
+| 41 | `oncoming_snowy_headon` | 57 OncomingLeftTurnAcrossPath | Strong | *(relabeled)* An oncoming taxi "suddenly turns left directly across its path" on a snow-covered street, and the ego's forced swerve (rather than brake, due to low traction) results in a further head-on collision — near-verbatim match to the new OncomingLeftTurnAcrossPath type. |
 | 42 | `pedestrian_bus_obstruct` | 15 ParkingCrossingPedestrian, 51 HeavyVehicle | Strong | Ego overtakes a stationary bus and collides with a pedestrian crossing in front of it, previously hidden by the bus — matches "pedestrian emerges from behind a [stationary vehicle], requiring a faster reaction," with a bus substituting for a parked car; ego's overtaking maneuver is itself a direct response to the bus, so HeavyVehicle applies alongside ParkingCrossingPedestrian at the same Strong confidence. |
 | 43 | `pedestrian_crosses_between_vehicles` | 14 DynamicObjectCrossing | Strong | A pedestrian crosses from behind a passing oncoming truck at night on an unlit road, giving the ego no time to stop — direct match to "suddenly crosses from behind a static prop." |
 | 44 | `pedestrian_night_dark` | 14 DynamicObjectCrossing | Strong | A pedestrian in dark clothing is invisible until illuminated by headlights while crossing an unlit highway — direct match to the sudden-pedestrian-crossing definition. |
 | 45 | `pedestrian_truck_avoid` | 53 HazardAvoidanceCutIn, 51 HeavyVehicle | Strong | *(relabeled)* A truck in the adjacent lane swerves sharply into the ego's lane to avoid a pedestrian — direct match to HazardAvoidanceCutIn, same family as `lateral_adv_cutin_navigateobstacle`; HeavyVehicle still applies since the adversary is a truck. |
 | 46 | `turning_adv_exit_ego_overtake` | 55 OvertakingIntoOncomingLane, 4 StaticCutIn | Moderate | *(relabeled)* Ego attempts to overtake a slow sedan on a two-lane residential road — a two-lane road means the overtake crosses into the opposing lane, matching OvertakingIntoOncomingLane; the sedan's simultaneous left turn cutting into the ego's path keeps StaticCutIn as a secondary label. |
 | 47 | `turning_ego_left_adv_mergesin_afterjunction` | 26 NonSignalizedJunctionLeftTurnEnterFlow, 52 JunctionEntryCutIn | Moderate | *(relabeled)* Ego exits a junction via a left turn and merges into city traffic, while another car cuts blindly across lanes from the right side of the junction to merge into the same path — the adversary's cut-in originates explicitly from the junction, matching JunctionEntryCutIn (Moderate, since it's a multi-lane blind cut rather than a single clean turn-into-lane). |
-| 48 | `turning_intersection_both_straight` | 37 OppositeVehicleRunningRedLight, 38 OppositeVehicleTakingPriority | Strong | A van on the right arm of an intersection drives straight across, failing to yield to the straight-traveling ego — classic perpendicular crossing-traffic failure-to-yield. |
+| 48 | `turning_intersection_both_straight` | 58 PerpendicularCrossingConflict | Strong | *(relabeled)* A van on the right arm of an intersection drives straight across, "failing to yield right-of-way" to the straight-traveling ego — direct match to PerpendicularCrossingConflict's "violating a stop/yield sign." |
 | 49 | `turning_obstructed_adv_view` | 4 StaticCutIn | Strong | A taxi pulls out from the right shoulder and cuts directly into the ego's lane, forcing a sharp deceleration to a stop — direct adjacent-lane cut-in match. |
 | 50 | `turning_truck_runredlight` | 23 SignalizedJunctionLeftTurn, 37 OppositeVehicleRunningRedLight, 51 HeavyVehicle | Strong | Ego turns left at an intersection and is struck by a truck from the left that runs a red light straight through — textbook combination of an unprotected left turn and a literal red-light-running crossing vehicle; the crossing adversary is a truck, so HeavyVehicle applies at the same Strong confidence. |
 
@@ -612,13 +659,23 @@ confidence and no unmatched rows in this pass.
   avoidance, obstacle avoidance, aggressive merging, and blind
   junction entries are all folded into the same type), and the
   Opposite*/HardBrake families again absorb several distinct crossing-
-  and braking-trigger patterns. Nothing here changes the `plan.md`
-  recommendation — if anything it strengthens the case for the proposed
-  `StoppedLeadVehicle`/`EmergencyObstacleAvoidance` and
-  `OncomingLeftTurnAcrossPath`/`PerpendicularCrossingConflict` splits,
-  since several rows here (#6, #17, #41, #48 for the Opposite* split;
-  #25, #26, #36, #38 for the HardBrake split) would resolve to a single
-  precise type instead of a 2-3-type Moderate guess.
+  and braking-trigger patterns.
+- **Update (Opposite\* split):** #7 (`InterDrive_r13_town05_ins_sl`) and
+  #48 (`turning_intersection_both_straight`, explicit "failing to yield
+  right-of-way") moved to the new PerpendicularCrossingConflict type
+  (58). #41 (`oncoming_snowy_headon`, explicit "oncoming...turns left
+  directly across its path") moved to the new OncomingLeftTurnAcrossPath
+  type (57). #6 (`IDR_5`) and #17 (`PC_9`) were re-read but *not* moved,
+  despite being flagged as candidates in an earlier pass — both describe
+  two simultaneous, distinct adversary conflicts (an oncoming left turn
+  *and* a separate cross-street entry, in #17 also a pedestrian), so
+  neither resolves to a single dominant geometry; they stay on the
+  generic 37/38 fallback, consistent with `plan.md` Part A's guidance to
+  keep multi-conflict scenes on the fallback rather than force-fit them.
+  #11 (`MMUE_3`, same dual-conflict shape as #6) and #50
+  (`turning_truck_runredlight`, ego is turning, not going straight, so
+  neither new type's straight-ego framing applies) also stay on the
+  fallback. See `plan.md` Part A.
 - `RN_3` (#19) is notable as the one scenario in the entire 250-scenario
   corpus where the *ego* is the aggressor causing the conflict (an
   improper lane position leading to an unsafe lane change that cuts off
